@@ -1,0 +1,26 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = deviceId; 
+            name = deviceId; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = iconURL; 
+            name = iconURL; 
+            prototypeName = varchar255; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; valueClassName = NSString; }, 
+        {allowsNull = Y; columnName = name; name = name; prototypeName = varchar255; }, 
+        {allowsNull = N; columnName = uuid; name = uuid; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (deviceId, iconURL, id, name, uuid); 
+    className = "com.dd.beaconscanner.metadata.LocationData"; 
+    classProperties = (deviceId, iconURL, name, uuid); 
+    externalName = LocationData; 
+    fetchSpecificationDictionary = {}; 
+    name = LocationData; 
+    primaryKeyAttributes = (id); 
+}

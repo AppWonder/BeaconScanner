@@ -1,0 +1,40 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    connectionDictionary = {URL = "jdbc:FrontBase://127.0.0.1/DatabaseName"; }; 
+    entities = (
+        {
+            className = "com.dd.beaconscanner.metadata.AssetBeacon"; 
+            name = AssetBeacon; 
+            parent = BeaconData; 
+        }, 
+        {className = "com.dd.beaconscanner.metadata.BeaconData"; name = BeaconData; }, 
+        {
+            className = "com.dd.beaconscanner.metadata.Channel"; 
+            name = Channel; 
+            parent = BeaconData; 
+        }, 
+        {className = "com.dd.beaconscanner.metadata.ChannelMap"; name = ChannelMap; }, 
+        {
+            className = "com.dd.beaconscanner.metadata.LocationData"; 
+            name = LocationData; 
+        }, 
+        {
+            className = "com.dd.beaconscanner.metadata.PersonBeacon"; 
+            name = PersonBeacon; 
+            parent = BeaconData; 
+        }
+    ); 
+    userInfo = {
+        "_EntityModeler" = {
+            activeDatabaseConfigName = Default; 
+            databaseConfigs = {
+                Default = {
+                    adaptorName = JDBC; 
+                    connectionDictionary = {URL = "jdbc:FrontBase://127.0.0.1/DatabaseName"; }; 
+                    prototypeEntityName = EOJDBCFrontBasePrototypes; 
+                }; 
+            }; 
+        }; 
+    }; 
+}

@@ -1,0 +1,25 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = assetType; 
+            name = assetType; 
+            prototypeName = varchar50; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {columnName = majorCode; name = majorCode; prototypeName = intNumber; }, 
+        {columnName = minorCode; name = minorCode; prototypeName = intNumber; }, 
+        {columnName = "record_type"; name = "record_type"; prototypeName = intNumber; }, 
+        {allowsNull = N; columnName = uuid; name = uuid; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (assetType, id, majorCode, minorCode, "record_type", uuid); 
+    className = "com.dd.beaconscanner.metadata.AssetBeacon"; 
+    classProperties = (assetType, majorCode, minorCode, "record_type", uuid); 
+    externalName = AssetBeacon; 
+    fetchSpecificationDictionary = {}; 
+    internalInfo = {"_javaClientClassName" = AssetBeacon; }; 
+    name = AssetBeacon; 
+    parent = BeaconData; 
+    primaryKeyAttributes = (id); 
+    restrictingQualifier = "record_type = 2000"; 
+}

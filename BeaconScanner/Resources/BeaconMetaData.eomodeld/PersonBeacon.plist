@@ -1,0 +1,31 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = firstName; 
+            name = firstName; 
+            prototypeName = varchar16; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = lastName; 
+            name = lastName; 
+            prototypeName = varchar50; 
+        }, 
+        {columnName = majorCode; name = majorCode; prototypeName = intNumber; }, 
+        {columnName = minorCode; name = minorCode; prototypeName = intNumber; }, 
+        {columnName = "record_type"; name = "record_type"; prototypeName = intNumber; }, 
+        {allowsNull = Y; columnName = title; name = title; prototypeName = varchar10; }, 
+        {allowsNull = N; columnName = uuid; name = uuid; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (firstName, id, lastName, majorCode, minorCode, "record_type", title, uuid); 
+    className = "com.dd.beaconscanner.metadata.PersonBeacon"; 
+    classProperties = (firstName, lastName, majorCode, minorCode, "record_type", title, uuid); 
+    externalName = PersonBeacon; 
+    fetchSpecificationDictionary = {}; 
+    name = PersonBeacon; 
+    parent = BeaconData; 
+    primaryKeyAttributes = (id); 
+    restrictingQualifier = "record_type = 2000"; 
+}
