@@ -1,7 +1,6 @@
 // DO NOT EDIT.  Make changes to BeaconData.java instead.
 package com.dd.beaconscanner.metadata;
 
-import com.dd.beaconscanner.metadata.interfaces.BeaconDataItem;
 import com.webobjects.eoaccess.*;
 import com.webobjects.eocontrol.*;
 import com.webobjects.foundation.*;
@@ -13,7 +12,7 @@ import er.extensions.eof.*;
 import er.extensions.foundation.*;
 
 @SuppressWarnings("all")
-public abstract class _BeaconData extends  ERXGenericRecord implements BeaconDataItem {
+public abstract class _BeaconData extends  ERXGenericRecord {
   public static final String ENTITY_NAME = "BeaconData";
 
   // Attribute Keys
@@ -40,38 +39,22 @@ public abstract class _BeaconData extends  ERXGenericRecord implements BeaconDat
     return localInstance;
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.BeaconDataItem#majorCode()
- */
-@Override
-public Integer majorCode() {
+  public Integer majorCode() {
     return (Integer) storedValueForKey(_BeaconData.MAJOR_CODE_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.BeaconDataItem#setMajorCode(java.lang.Integer)
- */
-@Override
-public void setMajorCode(Integer value) {
+  public void setMajorCode(Integer value) {
     if (_BeaconData.LOG.isDebugEnabled()) {
     	_BeaconData.LOG.debug( "updating majorCode from " + majorCode() + " to " + value);
     }
     takeStoredValueForKey(value, _BeaconData.MAJOR_CODE_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.BeaconDataItem#minorCode()
- */
-@Override
-public Integer minorCode() {
+  public Integer minorCode() {
     return (Integer) storedValueForKey(_BeaconData.MINOR_CODE_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.BeaconDataItem#setMinorCode(java.lang.Integer)
- */
-@Override
-public void setMinorCode(Integer value) {
+  public void setMinorCode(Integer value) {
     if (_BeaconData.LOG.isDebugEnabled()) {
     	_BeaconData.LOG.debug( "updating minorCode from " + minorCode() + " to " + value);
     }
@@ -89,19 +72,11 @@ public void setMinorCode(Integer value) {
     takeStoredValueForKey(value, _BeaconData.RECORD_TYPE_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.BeaconDataItem#uuid()
- */
-@Override
-public String uuid() {
+  public String uuid() {
     return (String) storedValueForKey(_BeaconData.UUID_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.BeaconDataItem#setUuid(java.lang.String)
- */
-@Override
-public void setUuid(String value) {
+  public void setUuid(String value) {
     if (_BeaconData.LOG.isDebugEnabled()) {
     	_BeaconData.LOG.debug( "updating uuid from " + uuid() + " to " + value);
     }

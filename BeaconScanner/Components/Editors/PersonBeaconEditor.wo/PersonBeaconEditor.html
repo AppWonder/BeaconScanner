@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>PersonBeacon-Editor</title>
+</head>
+<body>
+<wo:form><wo:popUpButton list="$allPersonBeacons" item="$currentPersonBeacon" displayString = "$currentPersonBeacon.infoString" noSelectionString = "--Register new PersonBeacon--" selection = "$selectedPersonBeacon" onChange="submit()"/></wo:form>
+<wo:if condition = "$selectedPersonBeacon">
+<fieldset><legend>Edit PersonBeacon-Metadata for <wo:string value="$selectedPersonBeacon.infoString" /></legend>
+<wo:form><table>
+<tr><th>UUID</th><td><wo:textField value="$selectedPersonBeacon.uuid" /></td></tr>
+<tr><th>Major</th><td><wo:textField value="$selectedPersonBeacon.majorCode" numberformat = "0"/></td></tr>
+<tr><th>Minor</th><td><wo:textField value="$selectedPersonBeacon.minorCode" numberformat = "0"/></td></tr>
+<tr><th>Title</th><td><wo:textField value="$selectedPersonBeacon.title" /></td></tr>
+<tr><th>First Name</th><td><wo:textField value="$selectedPersonBeacon.firstName" /></td></tr>
+<tr><th>Last Name</th><td><wo:textField value="$selectedPersonBeacon.lastName" /></td></tr>
+<tr><th>Icon URL</th><td><wo:textField value="$selectedPersonBeacon.iconURL" /></td></tr>
+<tr><th colspan="2"><wo:submitButton action="$saveChanges" value="save" /></th></tr>
+</table>
+</wo:form>
+</fieldset>
+</wo:if>
+<wo:else>
+<fieldset><legend>Register new PersonBeacon-Metadata</legend>
+<wo:form><table>
+<tr><th>UUID</th><td><wo:textField value="$newBeaconUuid" /></td></tr>
+<tr><th>Major</th><td><wo:textField value="$newBeaconMajorCode" numberformat = "0"/></td></tr>
+<tr><th>Minor</th><td><wo:textField value="$newBeaconMinorCode" numberformat = "0"/></td></tr>
+<tr><th>Title</th><td><wo:textField value="$newPersonBeaconTitle" /></td></tr>
+<tr><th>First Name</th><td><wo:textField value="$newPersonBeaconFirstName" /></td></tr>
+<tr><th>Last Name</th><td><wo:textField value="$newPersonBeaconLastName" /></td></tr>
+<tr><th>Icon URL</th><td><wo:textField value="$newPersonBeaconIconURL" /></td></tr>
+<tr><th colspan="2"><wo:submitButton action="$create" value="register" /></th></tr>
+</table>
+</wo:form>
+</fieldset>
+</wo:else>
+<ol>
+<wo:repetition list="$beaconManager.beaconsWithoutMetaData" item="$beacon">
+<li>uuid: <wo:string value="$beacon.uuid" />, major: <wo:string value="$beacon.major" />. minor: <wo:string value="$beacon.minor" /></li>
+</wo:repetition>
+</ol>
+</body>
+</html>

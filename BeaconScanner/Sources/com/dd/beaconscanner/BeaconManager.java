@@ -1,7 +1,5 @@
 package com.dd.beaconscanner;
 
-import sun.tools.tree.FinallyStatement;
-
 import com.dd.beaconscanner.metadata.BeaconData;
 import com.dd.beaconscanner.metadata.LocationData;
 import com.dd.beaconscanner.metadata.volotile.VolatileBeaconData;
@@ -41,6 +39,7 @@ public class BeaconManager {
 	
 	private BeaconManager(){
 		currentBeacons = new NSMutableArray<Beacon>();
+		currentLocations = new NSMutableArray<Location>();
 		beaconsByUniqueKey = new NSMutableDictionary<String,Beacon>();
 		locationsByUUID = new NSMutableDictionary<String, Location>();
 		beaconMetaDataForUniqueKey = new NSMutableDictionary<String, VolatileBeaconData>();
@@ -51,7 +50,7 @@ public class BeaconManager {
 	}
 
 	public NSArray<Beacon> currentBeacons() {
-		return currentBeacons;
+		return currentBeacons.immutableClone();
 	}
 
 
@@ -198,6 +197,28 @@ public class BeaconManager {
 	
 	public long timeOfLastHealthCheck(){
 		return timeOfLastHealthCheck;
+	}
+	
+	public NSArray<Location> locationsWithoutMetaData(){
+		NSMutableArray<Location> locationsWithoutMetaData = new NSMutableArray<Location>();
+		NSArray<Location> allLocations = currentLocations.immutableClone();
+		for(Location location : allLocations){
+			if(locationMetaDataForLocation(location)==null){
+				locationsWithoutMetaData.addObject(location);
+			}
+		}
+		return locationsWithoutMetaData.immutableClone();
+	}
+	
+	public NSArray<Beacon> beaconsWithoutMetaData(){
+		NSMutableArray<Beacon> beaconsWithoutMetaData = new NSMutableArray<Beacon>();
+		NSArray<Beacon> allBeacons = currentBeacons();
+		for(Beacon beacon : allBeacons){
+			if(beaconMetaDataForBeacon(beacon)==null){
+				beaconsWithoutMetaData.addObject(beacon);
+			}
+		}
+		return beaconsWithoutMetaData.immutableClone();
 	}
 }
 

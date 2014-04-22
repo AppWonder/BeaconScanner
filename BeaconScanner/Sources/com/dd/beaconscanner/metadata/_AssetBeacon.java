@@ -1,7 +1,6 @@
 // DO NOT EDIT.  Make changes to AssetBeacon.java instead.
 package com.dd.beaconscanner.metadata;
 
-import com.dd.beaconscanner.metadata.interfaces.BeaconDataItem;
 import com.webobjects.eoaccess.*;
 import com.webobjects.eocontrol.*;
 import com.webobjects.foundation.*;
@@ -13,11 +12,13 @@ import er.extensions.eof.*;
 import er.extensions.foundation.*;
 
 @SuppressWarnings("all")
-public abstract class _AssetBeacon extends com.dd.beaconscanner.metadata.BeaconData implements BeaconDataItem{
+public abstract class _AssetBeacon extends com.dd.beaconscanner.metadata.BeaconData {
   public static final String ENTITY_NAME = "AssetBeacon";
 
   // Attribute Keys
+  public static final ERXKey<String> ASSET_ID = new ERXKey<String>("assetId");
   public static final ERXKey<String> ASSET_TYPE = new ERXKey<String>("assetType");
+  public static final ERXKey<String> ICON_URL = new ERXKey<String>("iconURL");
   public static final ERXKey<Integer> MAJOR_CODE = new ERXKey<Integer>("majorCode");
   public static final ERXKey<Integer> MINOR_CODE = new ERXKey<Integer>("minorCode");
   public static final ERXKey<Integer> RECORD_TYPE = new ERXKey<Integer>("record_type");
@@ -25,7 +26,9 @@ public abstract class _AssetBeacon extends com.dd.beaconscanner.metadata.BeaconD
   // Relationship Keys
 
   // Attributes
+  public static final String ASSET_ID_KEY = ASSET_ID.key();
   public static final String ASSET_TYPE_KEY = ASSET_TYPE.key();
+  public static final String ICON_URL_KEY = ICON_URL.key();
   public static final String MAJOR_CODE_KEY = MAJOR_CODE.key();
   public static final String MINOR_CODE_KEY = MINOR_CODE.key();
   public static final String RECORD_TYPE_KEY = RECORD_TYPE.key();
@@ -42,6 +45,17 @@ public abstract class _AssetBeacon extends com.dd.beaconscanner.metadata.BeaconD
     return localInstance;
   }
 
+  public String assetId() {
+    return (String) storedValueForKey(_AssetBeacon.ASSET_ID_KEY);
+  }
+
+  public void setAssetId(String value) {
+    if (_AssetBeacon.LOG.isDebugEnabled()) {
+    	_AssetBeacon.LOG.debug( "updating assetId from " + assetId() + " to " + value);
+    }
+    takeStoredValueForKey(value, _AssetBeacon.ASSET_ID_KEY);
+  }
+
   public String assetType() {
     return (String) storedValueForKey(_AssetBeacon.ASSET_TYPE_KEY);
   }
@@ -51,6 +65,17 @@ public abstract class _AssetBeacon extends com.dd.beaconscanner.metadata.BeaconD
     	_AssetBeacon.LOG.debug( "updating assetType from " + assetType() + " to " + value);
     }
     takeStoredValueForKey(value, _AssetBeacon.ASSET_TYPE_KEY);
+  }
+
+  public String iconURL() {
+    return (String) storedValueForKey(_AssetBeacon.ICON_URL_KEY);
+  }
+
+  public void setIconURL(String value) {
+    if (_AssetBeacon.LOG.isDebugEnabled()) {
+    	_AssetBeacon.LOG.debug( "updating iconURL from " + iconURL() + " to " + value);
+    }
+    takeStoredValueForKey(value, _AssetBeacon.ICON_URL_KEY);
   }
 
 

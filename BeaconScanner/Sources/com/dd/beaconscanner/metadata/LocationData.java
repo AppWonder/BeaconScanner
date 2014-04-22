@@ -11,4 +11,9 @@ public class LocationData extends _LocationData {
 	public VolatileLocationData volatileRepresentation(){
 		return new VolatileLocationData(iconURL(), uuid(), name(), deviceId());
 	}
+	
+	
+	public String infoString(){
+		return uuid()+"--"+name()+"--"+deviceId();
+	}
 }

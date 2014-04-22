@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Radar-Editor</title>
+</head>
+<body>
+<wo:form><wo:popUpButton list="$allRadars" item="$currentRadar" displayString = "$currentRadar.infoString" selection = "$selectedRadar" noSelectionString = "--Register new Radar--" onChange="submit()"/></wo:form>
+<wo:if condition = "$selectedRadar">
+<fieldset><legend>Edit Radar-Metadata for <wo:string value="$selectedRadar.infoString" /></legend>
+<wo:form><table>
+<tr><th>UUID</th><td><wo:textField value="$selectedRadar.uuid" /></td></tr>
+<tr><th>Name</th><td><wo:textField value="$selectedRadar.name" /></td></tr>
+<tr><th>deviceId</th><td><wo:textField value="$selectedRadar.deviceId" /></td></tr>
+<tr><th>iconURL</th><td><wo:textField value="$selectedRadar.iconURL" /></td></tr>
+<tr><th colspan="2"><wo:submitButton action="$saveChanges" value="save" /></th></tr>
+</table>
+</wo:form>
+</fieldset>
+</wo:if>
+<wo:else>
+<fieldset><legend>Register new Radar-Metadata</legend>
+<wo:form><table>
+<tr><th>UUID</th><td><wo:textField value="$newRadarUUID" /></td></tr>
+<tr><th>Name</th><td><wo:textField value="$newRadarName" /></td></tr>
+<tr><th>deviceId</th><td><wo:textField value="$newRadarDeviceId" /></td></tr>
+<tr><th>iconURL</th><td><wo:textField value="$newRadarIconURL" /></td></tr>
+<tr><th colspan="2"><wo:submitButton action="$createNewRadar" value="register" /></th></tr>
+</table>
+</wo:form>
+</fieldset>
+</wo:else>
+<ol>
+<wo:repetition list="$beaconManager.locationsWithoutMetaData" item="$location">
+<li><wo:string value="$location.uuid" /></li>
+</wo:repetition>
+</ol>
+</body>
+</html>

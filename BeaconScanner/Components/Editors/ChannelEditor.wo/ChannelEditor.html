@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>Channel-Editor</title>
+</head>
+<body>
+<wo:form><wo:popUpButton list="$allChannels" item="$currentChannel" displayString = "$currentChannel.infoString" selection = "$selectedChannel" noSelectionString = "--Register new Channel--" onChange="submit()"/></wo:form>
+<wo:if condition = "$selectedChannel">
+<fieldset><legend>Edit Channel-Metadata for <wo:string value="$selectedChannel.infoString" /></legend>
+<wo:form><table>
+<tr><th>UUID</th><td><wo:textField value="$selectedChannel.uuid" /></td></tr>
+<tr><th>Major</th><td><wo:textField value="$selectedChannel.majorCode" numberformat = "0"/></td></tr>
+<tr><th>Minor</th><td><wo:textField value="$selectedChannel.minorCode" numberformat = "0"/></td></tr>
+<tr><th>Message</th><td><wo:text value="$selectedChannel.message" /></td></tr>
+<tr><th>Action</th><td><wo:text value="$selectedChannel.action" /></td></tr>
+<tr><th colspan="2"><wo:submitButton action="$saveChanges" value="save" /></th></tr>
+</table>
+</wo:form>
+</fieldset>
+</wo:if>
+<wo:else>
+<fieldset><legend>Register new Channel-Metadata</legend>
+<wo:form><table>
+<tr><th>UUID</th><td><wo:textField value="$newBeaconUuid" /></td></tr>
+<tr><th>Major</th><td><wo:textField value="$newBeaconMajorCode" numberformat = "0"/></td></tr>
+<tr><th>Minor</th><td><wo:textField value="$newBeaconMinorCode" numberformat = "0"/></td></tr>
+<tr><th>Message</th><td><wo:text value="$newChannelMessage" /></td></tr>
+<tr><th>Action</th><td><wo:text value="$newChannelAction" /></td></tr>
+<tr><th colspan="2"><wo:submitButton action="$create" value="register" /></th></tr>
+</table>
+</wo:form>
+</fieldset>
+</wo:else>
+<ol>
+<wo:repetition list="$beaconManager.beaconsWithoutMetaData" item="$beacon">
+<li>uuid: <wo:string value="$beacon.uuid" />, major: <wo:string value="$beacon.major" />. minor: <wo:string value="$beacon.minor" /></li>
+</wo:repetition>
+</ol>
+</body>
+</html>

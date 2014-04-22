@@ -16,14 +16,18 @@ public abstract class _Channel extends com.dd.beaconscanner.metadata.BeaconData 
   public static final String ENTITY_NAME = "Channel";
 
   // Attribute Keys
+  public static final ERXKey<String> ACTION = new ERXKey<String>("action");
   public static final ERXKey<Integer> MAJOR_CODE = new ERXKey<Integer>("majorCode");
+  public static final ERXKey<String> MESSAGE = new ERXKey<String>("message");
   public static final ERXKey<Integer> MINOR_CODE = new ERXKey<Integer>("minorCode");
   public static final ERXKey<Integer> RECORD_TYPE = new ERXKey<Integer>("record_type");
   public static final ERXKey<String> UUID = new ERXKey<String>("uuid");
   // Relationship Keys
 
   // Attributes
+  public static final String ACTION_KEY = ACTION.key();
   public static final String MAJOR_CODE_KEY = MAJOR_CODE.key();
+  public static final String MESSAGE_KEY = MESSAGE.key();
   public static final String MINOR_CODE_KEY = MINOR_CODE.key();
   public static final String RECORD_TYPE_KEY = RECORD_TYPE.key();
   public static final String UUID_KEY = UUID.key();
@@ -37,6 +41,28 @@ public abstract class _Channel extends com.dd.beaconscanner.metadata.BeaconData 
       throw new IllegalStateException("You attempted to localInstance " + this + ", which has not yet committed.");
     }
     return localInstance;
+  }
+
+  public String action() {
+    return (String) storedValueForKey(_Channel.ACTION_KEY);
+  }
+
+  public void setAction(String value) {
+    if (_Channel.LOG.isDebugEnabled()) {
+    	_Channel.LOG.debug( "updating action from " + action() + " to " + value);
+    }
+    takeStoredValueForKey(value, _Channel.ACTION_KEY);
+  }
+
+  public String message() {
+    return (String) storedValueForKey(_Channel.MESSAGE_KEY);
+  }
+
+  public void setMessage(String value) {
+    if (_Channel.LOG.isDebugEnabled()) {
+    	_Channel.LOG.debug( "updating message from " + message() + " to " + value);
+    }
+    takeStoredValueForKey(value, _Channel.MESSAGE_KEY);
   }
 
 

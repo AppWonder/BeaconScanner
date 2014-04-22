@@ -3,6 +3,7 @@ package com.dd.beaconscanner;
 import org.apache.commons.lang.StringUtils;
 
 import com.dd.beaconscanner.components.Main;
+import com.dd.beaconscanner.components.editors.AdminPortal;
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOApplication;
 import com.webobjects.appserver.WORequest;
@@ -38,5 +39,9 @@ public class DirectAction extends ERXDirectAction {
 			BeaconManager.getInstance().updateBeacon(beaconData, location);
 		}
 		return new ERXResponse("OK", 200);
+	}
+	
+	public WOActionResults adminAction(){
+		return pageWithName(AdminPortal.class);
 	}
 }

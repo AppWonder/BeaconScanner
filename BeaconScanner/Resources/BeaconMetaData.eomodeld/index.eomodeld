@@ -1,7 +1,7 @@
 {
     EOModelVersion = "2.1"; 
     adaptorName = JDBC; 
-    connectionDictionary = {URL = "jdbc:FrontBase://127.0.0.1/DatabaseName"; }; 
+    connectionDictionary = {URL = "jdbc:FrontBase://s1.appwonder.net/beacon/user=_SYSTEM"; }; 
     entities = (
         {
             className = "com.dd.beaconscanner.metadata.AssetBeacon"; 
@@ -31,7 +31,7 @@
             databaseConfigs = {
                 Default = {
                     adaptorName = JDBC; 
-                    connectionDictionary = {URL = "jdbc:FrontBase://127.0.0.1/DatabaseName"; }; 
+                    connectionDictionary = {URL = "jdbc:FrontBase://s1.appwonder.net/beacon/user=_SYSTEM"; }; 
                     prototypeEntityName = EOJDBCFrontBasePrototypes; 
                 }; 
             }; 

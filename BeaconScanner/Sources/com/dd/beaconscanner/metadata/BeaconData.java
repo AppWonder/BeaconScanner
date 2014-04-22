@@ -10,4 +10,8 @@ public abstract class BeaconData extends _BeaconData implements BeaconDataItem{
 	private static Logger log = Logger.getLogger(BeaconData.class);
 	
 	public abstract VolatileBeaconData volatileRepresentation();
+	
+	public String infoString(){
+		return uuid()+"--"+majorCode()+"--"+minorCode();
+	}
 }

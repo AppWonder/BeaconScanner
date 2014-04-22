@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>AssetBeacon-Editor</title>
+</head>
+<body>
+<wo:form><wo:popUpButton list="$allAssetBeacons" item="$currentAssetBeacon" noSelectionString = "--Register new Asset Beacon--" displayString = "$currentAssetBeacon.infoString" selection = "$selectedAssetBeacon" onChange="submit()"/></wo:form>
+<wo:if condition = "$selectedAssetBeacon">
+<fieldset><legend>Edit AssetBeacon-Metadata for <wo:string value="$selectedAssetBeacon.infoString" /></legend>
+<wo:form><table>
+<tr><th>UUID</th><td><wo:textField value="$selectedAssetBeacon.uuid" /></td></tr>
+<tr><th>Major</th><td><wo:textField value="$selectedAssetBeacon.majorCode" numberformat = "0"/></td></tr>
+<tr><th>Minor</th><td><wo:textField value="$selectedAssetBeacon.minorCode" numberformat = "0"/></td></tr>
+<tr><th>AssetId</th><td><wo:textField value="$selectedAssetBeacon.assetId" /></td></tr>
+<tr><th>AssetType</th><td><wo:textField value="$selectedAssetBeacon.assetType" /></td></tr>
+<tr><th>Icon URL</th><td><wo:textField value="$selectedAssetBeacon.iconURL" /></td></tr>
+<tr><th colspan="2"><wo:submitButton action="$saveChanges" value="save" /></th></tr>
+</table>
+</wo:form>
+</fieldset>
+</wo:if>
+<wo:else>
+<fieldset><legend>Register new AssetBeacon-Metadata</legend>
+<wo:form><table>
+<tr><th>UUID</th><td><wo:textField value="$newAssetBeaconUuid" /></td></tr>
+<tr><th>Major</th><td><wo:textField value="$newAssetBeaconMajorCode" numberformat = "0"/></td></tr>
+<tr><th>Minor</th><td><wo:textField value="$newAssetBeaconMinorCode" numberformat = "0"/></td></tr>
+<tr><th>AssetId</th><td><wo:textField value="$newAssetBeaconAssetId" /></td></tr>
+<tr><th>AssetType</th><td><wo:textField value="$newAssetBeaconAssetType" /></td></tr>
+<tr><th>Icon URL</th><td><wo:textField value="$newAssetBeaconAssetIconURL" /></td></tr>
+<tr><th colspan="2"><wo:submitButton action="$create" value="register" /></th></tr>
+</table>
+</wo:form>
+</fieldset>
+</wo:else>
+<ol>
+<wo:repetition list="$beaconManager.beaconsWithoutMetaData" item="$beacon">
+<li>uuid: <wo:string value="$beacon.uuid" />, major: <wo:string value="$beacon.major" />. minor: <wo:string value="$beacon.minor" /></li>
+</wo:repetition>
+</ol>
+</body>
+</html>

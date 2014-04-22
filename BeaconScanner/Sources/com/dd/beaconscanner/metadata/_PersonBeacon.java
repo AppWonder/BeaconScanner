@@ -17,6 +17,7 @@ public abstract class _PersonBeacon extends com.dd.beaconscanner.metadata.Beacon
 
   // Attribute Keys
   public static final ERXKey<String> FIRST_NAME = new ERXKey<String>("firstName");
+  public static final ERXKey<String> ICON_URL = new ERXKey<String>("iconURL");
   public static final ERXKey<String> LAST_NAME = new ERXKey<String>("lastName");
   public static final ERXKey<Integer> MAJOR_CODE = new ERXKey<Integer>("majorCode");
   public static final ERXKey<Integer> MINOR_CODE = new ERXKey<Integer>("minorCode");
@@ -27,6 +28,7 @@ public abstract class _PersonBeacon extends com.dd.beaconscanner.metadata.Beacon
 
   // Attributes
   public static final String FIRST_NAME_KEY = FIRST_NAME.key();
+  public static final String ICON_URL_KEY = ICON_URL.key();
   public static final String LAST_NAME_KEY = LAST_NAME.key();
   public static final String MAJOR_CODE_KEY = MAJOR_CODE.key();
   public static final String MINOR_CODE_KEY = MINOR_CODE.key();
@@ -54,6 +56,17 @@ public abstract class _PersonBeacon extends com.dd.beaconscanner.metadata.Beacon
     	_PersonBeacon.LOG.debug( "updating firstName from " + firstName() + " to " + value);
     }
     takeStoredValueForKey(value, _PersonBeacon.FIRST_NAME_KEY);
+  }
+
+  public String iconURL() {
+    return (String) storedValueForKey(_PersonBeacon.ICON_URL_KEY);
+  }
+
+  public void setIconURL(String value) {
+    if (_PersonBeacon.LOG.isDebugEnabled()) {
+    	_PersonBeacon.LOG.debug( "updating iconURL from " + iconURL() + " to " + value);
+    }
+    takeStoredValueForKey(value, _PersonBeacon.ICON_URL_KEY);
   }
 
   public String lastName() {

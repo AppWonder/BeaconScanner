@@ -13,4 +13,8 @@ public class AssetBeacon extends _AssetBeacon implements AssetBeaconItem{
 	public VolatileBeaconData volatileRepresentation(){
 		return new VolatileAssetBeacon(uuid(), minorCode(), majorCode(), assetType());
 	}
+	
+	public String infoString(){
+		return assetType()+"--"+assetId()+"--"+super.infoString();
+	}
 }

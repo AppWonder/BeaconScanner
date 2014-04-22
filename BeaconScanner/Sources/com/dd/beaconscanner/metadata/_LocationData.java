@@ -1,7 +1,6 @@
 // DO NOT EDIT.  Make changes to LocationData.java instead.
 package com.dd.beaconscanner.metadata;
 
-import com.dd.beaconscanner.metadata.interfaces.LocationDataItem;
 import com.webobjects.eoaccess.*;
 import com.webobjects.eocontrol.*;
 import com.webobjects.foundation.*;
@@ -13,7 +12,7 @@ import er.extensions.eof.*;
 import er.extensions.foundation.*;
 
 @SuppressWarnings("all")
-public abstract class _LocationData extends  ERXGenericRecord implements LocationDataItem {
+public abstract class _LocationData extends  ERXGenericRecord {
   public static final String ENTITY_NAME = "LocationData";
 
   // Attribute Keys
@@ -40,76 +39,44 @@ public abstract class _LocationData extends  ERXGenericRecord implements Locatio
     return localInstance;
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.LocationDataItem#deviceId()
- */
-@Override
-public String deviceId() {
+  public String deviceId() {
     return (String) storedValueForKey(_LocationData.DEVICE_ID_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.LocationDataItem#setDeviceId(java.lang.String)
- */
-@Override
-public void setDeviceId(String value) {
+  public void setDeviceId(String value) {
     if (_LocationData.LOG.isDebugEnabled()) {
     	_LocationData.LOG.debug( "updating deviceId from " + deviceId() + " to " + value);
     }
     takeStoredValueForKey(value, _LocationData.DEVICE_ID_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.LocationDataItem#iconURL()
- */
-@Override
-public String iconURL() {
+  public String iconURL() {
     return (String) storedValueForKey(_LocationData.ICON_URL_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.LocationDataItem#setIconURL(java.lang.String)
- */
-@Override
-public void setIconURL(String value) {
+  public void setIconURL(String value) {
     if (_LocationData.LOG.isDebugEnabled()) {
     	_LocationData.LOG.debug( "updating iconURL from " + iconURL() + " to " + value);
     }
     takeStoredValueForKey(value, _LocationData.ICON_URL_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.LocationDataItem#name()
- */
-@Override
-public String name() {
+  public String name() {
     return (String) storedValueForKey(_LocationData.NAME_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.LocationDataItem#setName(java.lang.String)
- */
-@Override
-public void setName(String value) {
+  public void setName(String value) {
     if (_LocationData.LOG.isDebugEnabled()) {
     	_LocationData.LOG.debug( "updating name from " + name() + " to " + value);
     }
     takeStoredValueForKey(value, _LocationData.NAME_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.LocationDataItem#uuid()
- */
-@Override
-public String uuid() {
+  public String uuid() {
     return (String) storedValueForKey(_LocationData.UUID_KEY);
   }
 
-  /* (non-Javadoc)
- * @see com.dd.beaconscanner.metadata.LocationDataItem#setUuid(java.lang.String)
- */
-@Override
-public void setUuid(String value) {
+  public void setUuid(String value) {
     if (_LocationData.LOG.isDebugEnabled()) {
     	_LocationData.LOG.debug( "updating uuid from " + uuid() + " to " + value);
     }
