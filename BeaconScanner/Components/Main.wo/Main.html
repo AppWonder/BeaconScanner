@@ -1,10 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <html>
 	<head>
-		<title>Untitled</title>
+		<title>BeaconScanner</title>
 	</head>
 	<body>
-	<wo:AjaxPing targetContainerID="beakonOverview" cacheKey="$beaconManager.updateCount"/><wo:AjaxUpdateContainer id="beakonOverview"><wo:string value="$beaconManager.updateCount" /><wo:repetition list = "$availableLocations" item="$currentLocation">
+	<wo:AjaxPing targetContainerID="beaconOverview" cacheKey="$beaconManager.updateCount"/><wo:AjaxUpdateContainer id="beaconOverview"><wo:string value="$beaconManager.updateCount" /><wo:repetition list = "$availableLocations" item="$currentLocation">
 Beacons for Location <wo:string value="$currentLocation" />
 <table border="1">
 <tr><th>UUID</th><th>Major</th><th>Minor</th><th>Power</th><th>RSSI</th><th>Location</th><td>Health</td></tr>

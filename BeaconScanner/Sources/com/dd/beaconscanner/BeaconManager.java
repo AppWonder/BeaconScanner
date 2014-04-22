@@ -77,10 +77,11 @@ public class BeaconManager {
 				String[] bleChunks = lines[i].split("\\s+");
 				String uniqueKey = uniqueKeyForBLEChunk(bleChunks);
 				Beacon beacon =  beaconsByUniqueKey.objectForKey(uniqueKey);
-				Location location = locationsByUUID.objectForKey(locationsByUUID);
+				Location location = locationsByUUID.objectForKey(locationuuid);
 				if(location==null){
 					location = new Location(locationuuid);
 					currentLocations.addObject(location);
+					locationsByUUID.setObjectForKey(location, locationuuid);
 				}
 				location.update(null);
 				if(beacon==null){
