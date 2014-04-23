@@ -58,6 +58,7 @@ public class AssetBeaconEditor extends BaseComponent {
 
 	public WOActionResults saveChanges() {
 		editingContext().saveChanges();
+		beaconManager().resetVolatileMetaData();
 		return null;
 	}
 

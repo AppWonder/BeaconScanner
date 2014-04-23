@@ -3,6 +3,7 @@ package com.dd.beaconscanner;
 import org.apache.commons.lang.StringUtils;
 
 import com.dd.beaconscanner.components.Main;
+import com.dd.beaconscanner.components.RadarOverview;
 import com.dd.beaconscanner.components.editors.AdminPortal;
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOApplication;
@@ -43,5 +44,9 @@ public class DirectAction extends ERXDirectAction {
 	
 	public WOActionResults adminAction(){
 		return pageWithName(AdminPortal.class);
+	}
+	
+	public WOActionResults radarOverviewAction(){
+		return pageWithName(RadarOverview.class);
 	}
 }

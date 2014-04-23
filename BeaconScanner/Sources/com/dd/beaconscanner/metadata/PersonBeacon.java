@@ -11,6 +11,6 @@ public class PersonBeacon extends _PersonBeacon implements PersonBeaconItem{
 	private static Logger log = Logger.getLogger(PersonBeacon.class);
 	
 	public VolatileBeaconData volatileRepresentation(){
-		return new VolatilePersonBeacon(uuid(), minorCode(), majorCode(), firstName(), lastName(), title());
+		return new VolatilePersonBeacon(uuid(), minorCode(), majorCode(), firstName(), lastName(), title(), position(),iconURL());
 	}
 }

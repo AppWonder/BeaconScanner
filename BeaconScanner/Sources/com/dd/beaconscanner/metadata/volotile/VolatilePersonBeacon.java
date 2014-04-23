@@ -12,6 +12,8 @@ import com.dd.beaconscanner.metadata.interfaces.PersonBeaconItem;
 public class VolatilePersonBeacon extends VolatileBeaconData implements
 		PersonBeaconItem {
 
+	
+
 	/**
 	 * @param uuid
 	 * @param minorCode
@@ -21,16 +23,20 @@ public class VolatilePersonBeacon extends VolatileBeaconData implements
 	 * @param title
 	 */
 	public VolatilePersonBeacon(String uuid, Integer minorCode,
-			Integer majorCode, String firstName, String lastName, String title) {
+			Integer majorCode, String firstName, String lastName, String title, String position,String iconURL) {
 		super(uuid, minorCode, majorCode);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.title = title;
+		this.position = position;
+		this.setIconURL(iconURL);
 	}
 
 	private String firstName;
 	private String lastName;
 	private String title;
+	private String position;
+	private String iconURL;
 
 	/* (non-Javadoc)
 	 * @see com.dd.beaconscanner.metadata.interfaces.PersonBeaconItem#firstName()
@@ -84,7 +90,23 @@ public class VolatilePersonBeacon extends VolatileBeaconData implements
 	}
 	
 	public String type(){
-		return "person";
+		return BEACON_META_DATA_TYPE_PERSON;
+	}
+
+	public String position() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String iconURL() {
+		return iconURL;
+	}
+
+	public void setIconURL(String iconURL) {
+		this.iconURL = iconURL;
 	}
 
 }

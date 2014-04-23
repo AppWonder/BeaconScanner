@@ -4,6 +4,10 @@ import com.dd.beaconscanner.metadata.interfaces.BeaconDataItem;
 
 public abstract class VolatileBeaconData implements BeaconDataItem {
 
+	public static final String BEACON_META_DATA_TYPE_PERSON = "person";
+	public static final String BEACON_META_DATA_TYPE_ASSET = "asset";
+	public static final String BEACON_META_DATA_TYPE_CHANNEL = "channel";
+	
 	/**
 	 * @param uuid
 	 * @param minorCode

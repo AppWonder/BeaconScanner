@@ -221,5 +221,23 @@ public class BeaconManager {
 		}
 		return beaconsWithoutMetaData.immutableClone();
 	}
+	
+	public NSDictionary<String,Location> locationsByUUID(){
+		return locationsByUUID.immutableClone();
+	}
+	
+	public void resetVolatileMetaData(){
+		lock.tryLock();
+		try{
+			beaconMetaDataForUniqueKey = new NSMutableDictionary<String, VolatileBeaconData>();
+			locationMetaDataForUUID = new NSMutableDictionary<String, VolatileLocationData>();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			lock.unlock();
+		}
+	}
 }
 

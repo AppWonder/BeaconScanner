@@ -1,0 +1,92 @@
+body {
+    background-color: #4b4b4b;
+}
+
+.beacons .row {
+    display: table;
+}
+.beacons .beacon {
+    display: table-cell;
+    vertical-align: middle;
+    height: 34px;
+    float: none;
+}
+
+/* green beacon */
+.beacons .beacon-active {
+    background: url('img/green.png') no-repeat 10px center;
+    background-size: 27px 34px;
+}
+
+/* red beacon */
+.beacons .beacon-inactive {
+    background: url('img/red.png') no-repeat 10px center;
+    background-size: 27px 34px;
+}
+
+.beacons .beacon-icon {
+    background: url('img/beacon.png') no-repeat right 10px center;
+    background-size: 26px 26px;
+    opacity: 1;
+    text-indent: -1000px;
+
+    /* simple fade effect for signal icon */
+    -webkit-transition: opacity 500ms ease-out;
+    transition: opacity 500ms ease-out;
+}
+
+.beacons .collapsed .beacon-icon {
+    opacity: 0.5;
+}
+
+.beacons .thumbnail {
+    border: none;
+    background-color: transparent;
+    color: #000000;
+}
+
+.beacons .thumbnail.decay {
+    opacity: 0.5;
+}
+
+.beacons .thumbnail.medium_health {
+    opacity: 0.6;
+}
+
+.beacons .thumbnail.bad_health {
+    opacity: 0.3;
+}
+
+.beacons .thumbnail .caption {
+    text-align: center;
+}
+.beacons .beacon-id {
+    color: #FFFFFF;
+}
+
+.panel, .panel-body, .panel-collapse.collapse.in {
+    border: none !important;
+}
+
+.panel-body .row {
+    display: block;
+}
+
+.panel-heading {
+    background-image: -webkit-linear-gradient(#e4e4e4 0%, #acacac 100%);
+    background-image: linear-gradient(#e4e4e4 0%, #acacac 100%);
+    border: none;
+}
+
+.panel-collapse {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3) inset;
+}
+
+.panel-collapse {
+    background-color: #808281;
+}
+
+.panel {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px !important;
+}

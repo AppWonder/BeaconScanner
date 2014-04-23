@@ -21,6 +21,12 @@
         }, 
         {columnName = majorCode; name = majorCode; prototypeName = intNumber; }, 
         {columnName = minorCode; name = minorCode; prototypeName = intNumber; }, 
+        {
+            allowsNull = Y; 
+            columnName = position; 
+            name = position; 
+            prototypeName = varchar50; 
+        }, 
         {columnName = "record_type"; name = "record_type"; prototypeName = intNumber; }, 
         {allowsNull = Y; columnName = title; name = title; prototypeName = varchar10; }, 
         {allowsNull = N; columnName = uuid; name = uuid; prototypeName = varchar50; }
@@ -32,6 +38,7 @@
         lastName, 
         majorCode, 
         minorCode, 
+        position, 
         "record_type", 
         title, 
         uuid
@@ -43,6 +50,7 @@
         lastName, 
         majorCode, 
         minorCode, 
+        position, 
         "record_type", 
         title, 
         uuid

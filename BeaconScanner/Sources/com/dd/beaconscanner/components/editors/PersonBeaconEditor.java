@@ -20,6 +20,7 @@ public class PersonBeaconEditor extends BaseComponent {
 	private String newPersonBeaconLastName;
 	private String newPersonBeaconIconURL;
 	private Beacon beacon;
+	private String newPersonBeaconPosition;
 
 	public PersonBeaconEditor(WOContext context) {
         super(context);
@@ -59,6 +60,7 @@ public class PersonBeaconEditor extends BaseComponent {
 
 	public WOActionResults saveChanges() {
 		editingContext().saveChanges();
+		beaconManager().resetVolatileMetaData();
 		return null;
 	}
 
@@ -166,6 +168,7 @@ public class PersonBeaconEditor extends BaseComponent {
 			beacon.setTitle(newPersonBeaconTitle());
 			beacon.setFirstName(newPersonBeaconFirstName);
 			beacon.setLastName(newPersonBeaconLastName);
+			beacon.setPosition(newPersonBeaconPosition);
 			beacon.setIconURL(newPersonBeaconIconURL());
 			saveChanges();
 			setSelectedPersonBeacon(beacon);
@@ -185,5 +188,19 @@ public class PersonBeaconEditor extends BaseComponent {
 	 */
 	public void setBeacon(Beacon beacon) {
 		this.beacon = beacon;
+	}
+
+	/**
+	 * @return the newPersonBeaconPosition
+	 */
+	public String newPersonBeaconPosition() {
+		return newPersonBeaconPosition;
+	}
+
+	/**
+	 * @param newPersonBeaconPosition the newPersonBeaconPosition to set
+	 */
+	public void setNewPersonBeaconPosition(String newPersonBeaconPosition) {
+		this.newPersonBeaconPosition = newPersonBeaconPosition;
 	}
 }

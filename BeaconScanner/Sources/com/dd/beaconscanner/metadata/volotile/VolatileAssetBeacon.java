@@ -7,6 +7,8 @@ public class VolatileAssetBeacon extends VolatileBeaconData implements AssetBeac
 
 
 
+	
+
 	/**
 	 * @param uuid
 	 * @param minorCode
@@ -14,12 +16,16 @@ public class VolatileAssetBeacon extends VolatileBeaconData implements AssetBeac
 	 * @param assetType
 	 */
 	public VolatileAssetBeacon(String uuid, Integer minorCode,
-			Integer majorCode, String assetType) {
+			Integer majorCode, String assetType, String assetId, String iconURL) {
 		super(uuid, minorCode, majorCode);
 		this.assetType = assetType;
+		this.assetId = assetId;
+		this.iconURL = iconURL;
 	}
 
 	private String assetType;
+	private String assetId;
+	private String iconURL;
 
 	@Override
 	public String assetType() {
@@ -32,7 +38,22 @@ public class VolatileAssetBeacon extends VolatileBeaconData implements AssetBeac
 	}
 	
 	public String type(){
-		return "asset";
+		return BEACON_META_DATA_TYPE_ASSET;
 	}
 
+	public String assetId() {
+		return assetId;
+	}
+
+	public void setAssetId(String assetId) {
+		this.assetId = assetId;
+	}
+
+	public String iconURL(){
+		return iconURL;
+	}
+	
+	public void setIconURL(String iconURL){
+		this.iconURL = iconURL;
+	}
 }

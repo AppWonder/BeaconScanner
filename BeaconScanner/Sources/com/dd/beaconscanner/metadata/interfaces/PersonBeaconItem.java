@@ -7,4 +7,8 @@ public interface PersonBeaconItem extends BeaconDataItem {
 	public void setLastName(String lastName);
 	public String title();
 	public void setTitle(String title);
+	public String position();
+	public void setPosition(String position);
+	public String iconURL();
+	public void setIconURL(String iconURL);
 }

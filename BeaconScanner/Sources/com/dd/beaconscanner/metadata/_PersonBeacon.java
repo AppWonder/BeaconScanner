@@ -21,6 +21,7 @@ public abstract class _PersonBeacon extends com.dd.beaconscanner.metadata.Beacon
   public static final ERXKey<String> LAST_NAME = new ERXKey<String>("lastName");
   public static final ERXKey<Integer> MAJOR_CODE = new ERXKey<Integer>("majorCode");
   public static final ERXKey<Integer> MINOR_CODE = new ERXKey<Integer>("minorCode");
+  public static final ERXKey<String> POSITION = new ERXKey<String>("position");
   public static final ERXKey<Integer> RECORD_TYPE = new ERXKey<Integer>("record_type");
   public static final ERXKey<String> TITLE = new ERXKey<String>("title");
   public static final ERXKey<String> UUID = new ERXKey<String>("uuid");
@@ -32,6 +33,7 @@ public abstract class _PersonBeacon extends com.dd.beaconscanner.metadata.Beacon
   public static final String LAST_NAME_KEY = LAST_NAME.key();
   public static final String MAJOR_CODE_KEY = MAJOR_CODE.key();
   public static final String MINOR_CODE_KEY = MINOR_CODE.key();
+  public static final String POSITION_KEY = POSITION.key();
   public static final String RECORD_TYPE_KEY = RECORD_TYPE.key();
   public static final String TITLE_KEY = TITLE.key();
   public static final String UUID_KEY = UUID.key();
@@ -78,6 +80,17 @@ public abstract class _PersonBeacon extends com.dd.beaconscanner.metadata.Beacon
     	_PersonBeacon.LOG.debug( "updating lastName from " + lastName() + " to " + value);
     }
     takeStoredValueForKey(value, _PersonBeacon.LAST_NAME_KEY);
+  }
+
+  public String position() {
+    return (String) storedValueForKey(_PersonBeacon.POSITION_KEY);
+  }
+
+  public void setPosition(String value) {
+    if (_PersonBeacon.LOG.isDebugEnabled()) {
+    	_PersonBeacon.LOG.debug( "updating position from " + position() + " to " + value);
+    }
+    takeStoredValueForKey(value, _PersonBeacon.POSITION_KEY);
   }
 
   public String title() {

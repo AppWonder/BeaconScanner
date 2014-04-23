@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Beacon Manager UI</title>
+    <wo:ERXStyleSheet filename = "css/bootstrap.min.css" />
+    <wo:ERXStyleSheet filename = "css/main.css" />
+
+</head>
+<body>
+
+    <p>&nbsp;</p>
+
+    <div class="container">
+
+        <!-- Panel Group Start -->
+        <div class="panel-group beacons" id="accordion">
+<wo:repetition list="$allRadar" item="$currentRadar">
+            <!-- Panel Start -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <wo:genericContainer elementName="a" data-toggle="collapse" data-parent="#accordion" href="$collapseLinkForCurrentBeaconPanel" class="collapsed">
+                           <wo:AjaxUpdateContainer class="row" id="$currentUpdateRadarStatusId">
+                                <wo:genericContainer elementName="div" class="$radarStatusIconCSSClasses">&nbsp;</wo:genericContainer>
+                                <div class="col-xs-9 beacon beacon-name"><wo:string value="$currentRadar.name" /></div>
+                                <div class="col-xs-1 beacon beacon-persons"><div class="pull-right>"><wo:string value="$beaconCountForCurrentRadar" /></div></div>
+                                <div class="col-xs-1 beacon beacon-icon">&nbsp;</div>
+                            </wo:AjaxUpdateContainer>
+                        </wo:genericContainer>
+                    </h4>
+                </div>
+                <wo:genericContainer elementName="div" id="$currentRadarPanelId" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <wo:AjaxUpdateContainer id="$currentUpdateRadarPanelId" class="row">
+                        
+                            <div class="col-xs-1 beacon-id"><wo:string value="$currentRadar.deviceId" /></div>
+                            <div class="col-xs-11">
+                                <div class="row">
+                                <wo:repetition list="$allBeaconsOfCurrentRadar" item="$currentBeacon"><wo:if condition="$beaconDataForCurrentBeacon">
+                                    <div class="col-xs-3">
+                                        <wo:genericContainer elementName="div" class="$beaconStatusCSSClasses">
+                                            <wo:image src="$iconURLForCurrentBeaconDisplay" />
+                                            <div class="caption">
+                                                <h4><wo:string value="$firstLineForCurrentBeaconDisplay" /></h4>
+                                                <p><wo:string value="$secondLineForCurrentBeaconDisplay" /></p>
+                                            </div>
+                                        </wo:genericContainer>
+                                    </div></wo:if>
+                                   </wo:repetition>
+                                </div>
+                            </div>
+                            </wo:AjaxUpdateContainer>
+                        
+                    </div>
+               </wo:genericContainer>
+    </div>        
+            <!-- Panel End -->
+
+           
+
+
+
+        
+        <!-- Panel Group End -->
+
+    
+    </wo:repetition>
+    </div>
+    </div>
+    
+    <wo:AjaxPing targetContainerID="beaconOverview" cacheKey="$beaconManager.updateCount"/><wo:AjaxUpdateContainer id="beaconOverview"><wo:AjaxUpdateTrigger updateContainerIDs = "$pannelsToUpdate"/><wo:string value="$beaconManager.updateCount" /></wo:AjaxUpdateContainer>
+	<wo:ERXJavaScript filename = "js/jquery-2.1.0.min.js" />
+	<script>
+	jQuery.noConflict();
+	</script>
+    <wo:ERXJavaScript filename = "js/bootstrap.min.js" />
+    <wo:ERXJavaScript filename = "js/main.js" />
+
+</body>
+</html>

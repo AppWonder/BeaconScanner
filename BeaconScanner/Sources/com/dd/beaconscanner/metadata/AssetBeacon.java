@@ -11,7 +11,7 @@ public class AssetBeacon extends _AssetBeacon implements AssetBeaconItem{
 	private static Logger log = Logger.getLogger(AssetBeacon.class);
 	
 	public VolatileBeaconData volatileRepresentation(){
-		return new VolatileAssetBeacon(uuid(), minorCode(), majorCode(), assetType());
+		return new VolatileAssetBeacon(uuid(), minorCode(), majorCode(), assetType(), assetId(),iconURL());
 	}
 	
 	public String infoString(){
