@@ -2,6 +2,33 @@ body {
     background-color: #4b4b4b;
 }
 
+h1 {
+    color: #CCCCCC;
+    letter-spacing: .1em;
+    font-weight: 100;
+}
+
+.container {
+    min-width: 640px;
+}
+
+.beacon-header {
+    color: #FFFFFF;
+}
+
+.beacon-header a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 200;
+    letter-spacing: .1em;
+}
+
+.beacon-header a.active,
+.beacon-header a:hover {
+    color: #FFFFFF;
+}
+
 .beacons .row {
     display: table;
 }
@@ -49,14 +76,6 @@ body {
     opacity: 0.5;
 }
 
-.beacons .thumbnail.medium_health {
-    opacity: 0.6;
-}
-
-.beacons .thumbnail.bad_health {
-    opacity: 0.3;
-}
-
 .beacons .thumbnail .caption {
     text-align: center;
 }
@@ -89,4 +108,41 @@ body {
 .panel {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px !important;
+}
+
+table.table {
+    background-color: #FFFFFF;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+table.sortable th {
+    position: relative;
+}
+
+table.sortable th.headerSortDown:after {
+    position: absolute;
+    right: 10px;
+    content: '▲';
+    color: #444444;
+    font-size: 10px;
+}
+
+table.sortable th.headerSortUp:after {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    content: '▼';
+    color: #444444;
+    font-size: 10px;
+}
+
+table.sortable thead {
+    background-image: -webkit-linear-gradient(#e4e4e4 0%, #acacac 100%);
+    background-image: linear-gradient(#e4e4e4 0%, #acacac 100%);
+}
+
+table,
+[data-role="tablefilter"] {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }

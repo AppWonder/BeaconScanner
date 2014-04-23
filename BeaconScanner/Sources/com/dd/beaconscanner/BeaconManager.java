@@ -71,19 +71,21 @@ public class BeaconManager {
 		try{
 			lock.tryLock();
 			updateCount++;
+			Location location = locationsByUUID.objectForKey(locationuuid);
+			if(location==null){
+				location = new Location(locationuuid);
+				currentLocations.addObject(location);
+				locationsByUUID.setObjectForKey(location, locationuuid);
+			}
+			location.update(null);
 			String lines[] = beaconData.split("\\r?\\n");
 			for(int i = 0; i<lines.length;i++){
 				
 				String[] bleChunks = lines[i].split("\\s+");
 				String uniqueKey = uniqueKeyForBLEChunk(bleChunks);
 				Beacon beacon =  beaconsByUniqueKey.objectForKey(uniqueKey);
-				Location location = locationsByUUID.objectForKey(locationuuid);
-				if(location==null){
-					location = new Location(locationuuid);
-					currentLocations.addObject(location);
-					locationsByUUID.setObjectForKey(location, locationuuid);
-				}
-				location.update(null);
+				
+				
 				if(beacon==null){
 					beacon = new Beacon(bleChunks);
 					beacon.setLocation(locationuuid);
@@ -231,6 +233,7 @@ public class BeaconManager {
 		try{
 			beaconMetaDataForUniqueKey = new NSMutableDictionary<String, VolatileBeaconData>();
 			locationMetaDataForUUID = new NSMutableDictionary<String, VolatileLocationData>();
+			updateCount++;
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -238,6 +241,11 @@ public class BeaconManager {
 		finally{
 			lock.unlock();
 		}
+	}
+	
+	public Beacon beaconForUniqueKey(String uniqueKey){
+		Beacon aBeacon = Beacon.UNIQUE_KEY.eq(uniqueKey).filtered(currentBeacons().immutableClone()).lastObject();
+		return aBeacon;
 	}
 }
 

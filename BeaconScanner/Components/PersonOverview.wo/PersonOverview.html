@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Person Beacon Manager</title>
+    <wo:ERXStyleSheet filename = "css/bootstrap.min.css" />
+    <wo:ERXStyleSheet filename = "css/main.css" />
+
+</head>
+<body>
+
+    <p>&nbsp;</p>
+<wo:NavigationBar />
+    <div class="container">
+    <h1>Persons</h1>
+        <form role="form"><input data-role="tablefilter" data-tableid="persons" type="search" class="form-control" placeholder="Search..." /></form>
+        <br />
+        <table id="persons" class="table sortable">
+            <thead>
+                <tr>
+                <th>&nbsp;</th>
+                <th>Title</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+           <!--  <tbody>-->
+            <wo:AjaxUpdateContainer id="personOverview" elementName="tbody" class="row">
+                <wo:repetition list="$allPerson" item="$currentPerson"><tr>
+                <td><wo:image src="$currentPerson.iconURL" height="50"/></td>
+                <td><wo:string value="$currentPerson.title" /></td>
+                    <td><wo:string value="$currentPerson.lastName" />, <wo:string value="$currentPerson.firstName" /></td>
+                    <td><wo:string value="$currentPerson.position" /></td>
+                    <td><wo:string value="$locationForCurrentPerson" /></td>
+                </tr></wo:repetition>
+                </wo:AjaxUpdateContainer>
+            <!--  </tbody>-->
+        </table>
+    </div>
+      <wo:AjaxPing targetContainerID="personOverview" cacheKey="$beaconManager.updateCount"/>  
+	<wo:ERXJavaScript filename = "js/jquery-2.1.0.min.js" />
+	<wo:ERXJavaScript filename = "js/jquery.tablesorter.min.js" />
+	<script>
+	jQuery.noConflict();
+	</script>
+    <wo:ERXJavaScript filename = "js/bootstrap.min.js" />
+    <wo:ERXJavaScript filename = "js/main.js" />
+
+</body>
+</html>

@@ -14,4 +14,8 @@ public abstract class BeaconData extends _BeaconData implements BeaconDataItem{
 	public String infoString(){
 		return uuid()+"--"+majorCode()+"--"+minorCode();
 	}
+	
+	public String uniqueKey(){
+		return uuid()+""+majorCode()+""+minorCode();
+	}
 }
