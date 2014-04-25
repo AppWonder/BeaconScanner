@@ -6,9 +6,9 @@ import com.dd.beaconscanner.Beacon;
 import com.dd.beaconscanner.HealthItem;
 import com.dd.beaconscanner.Location;
 import com.dd.beaconscanner.metadata.LocationData;
-import com.dd.beaconscanner.metadata.volotile.VolatileAssetBeacon;
+import com.dd.beaconscanner.metadata.interfaces.ChannelDataItem;
 import com.dd.beaconscanner.metadata.volotile.VolatileBeaconData;
-import com.dd.beaconscanner.metadata.volotile.VolatilePersonBeacon;
+import com.dd.beaconscanner.metadata.volotile.VolatileChannelBeacon;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
@@ -16,6 +16,7 @@ import com.webobjects.foundation.NSMutableArray;
 public class RadarOverview extends BaseComponent {
     private LocationData currentRadar;
 	private Beacon currentBeacon;
+	private NSMutableArray<VolatileBeaconData> currentlyDisplayedBeacons;
 	
 	private String thirdLineForCurrentBeaconDisplay;
 
@@ -52,46 +53,43 @@ public class RadarOverview extends BaseComponent {
 	
 	public String firstLineForCurrentBeaconDisplay(){
 		VolatileBeaconData beaconData = beaconDataForCurrentBeacon();
-		if(VolatileBeaconData.BEACON_META_DATA_TYPE_PERSON.equals(beaconData.type())){
-			VolatilePersonBeacon person = (VolatilePersonBeacon)beaconData;
-			return person.title()+" "+person.firstName()+" "+person.lastName();
-		}
-		if(VolatileBeaconData.BEACON_META_DATA_TYPE_ASSET.equals(beaconData.type())){
-			VolatileAssetBeacon asset = (VolatileAssetBeacon)beaconData;
-			return asset.assetType();
+		if(beaconData!=null){
+			return beaconData.primaryInformationString();
 		}
 		return null;
 	}
 	
 	public String secondLineForCurrentBeaconDisplay(){
 		VolatileBeaconData beaconData = beaconDataForCurrentBeacon();
-		if(VolatileBeaconData.BEACON_META_DATA_TYPE_PERSON.equals(beaconData.type())){
-			VolatilePersonBeacon person = (VolatilePersonBeacon)beaconData;
-			return person.position();
-		}
-		if(VolatileBeaconData.BEACON_META_DATA_TYPE_ASSET.equals(beaconData.type())){
-			VolatileAssetBeacon asset = (VolatileAssetBeacon)beaconData;
-			return asset.assetId();
+		if(beaconData!=null){
+			return beaconData.secondaryInformationString();
 		}
 		return null;
 	}
 
 	public String iconURLForCurrentBeaconDisplay(){
 		VolatileBeaconData beaconData = beaconDataForCurrentBeacon();
-		if(VolatileBeaconData.BEACON_META_DATA_TYPE_PERSON.equals(beaconData.type())){
-			VolatilePersonBeacon person = (VolatilePersonBeacon)beaconData;
-			return person.iconURL();
-		}
-		if(VolatileBeaconData.BEACON_META_DATA_TYPE_ASSET.equals(beaconData.type())){
-			VolatileAssetBeacon asset = (VolatileAssetBeacon)beaconData;
-			return asset.iconURL();
+		if(beaconData!=null){
+			return beaconData.iconURL();
 		}
 		return null;
 	}
 
 	
 	public VolatileBeaconData beaconDataForCurrentBeacon(){
-		return beaconManager().beaconMetaDataForBeacon(currentBeacon);	
+		if(currentlyDisplayedBeacons==null){
+			currentlyDisplayedBeacons = new NSMutableArray<VolatileBeaconData>();
+		}
+		VolatileBeaconData beaconData = beaconManager().beaconMetaDataForBeacon(currentBeacon);
+		if(beaconData instanceof VolatileChannelBeacon){
+			beaconData = ((VolatileChannelBeacon)beaconData).beaconData();
+		}
+		if(currentlyDisplayedBeacons.containsObject(beaconData)){
+			//Beacon is already displayed so we don't want to display it again
+			return null;
+		}
+		currentlyDisplayedBeacons.addObject(beaconData);
+		return beaconData;
 	}
 	
 	/**
@@ -171,10 +169,16 @@ public class RadarOverview extends BaseComponent {
 	}
 	
 	private void applyThirdLineForCurrentBeaconDisplay() {
-		thirdLineForCurrentBeaconDisplay = ((NSArray<String>)VolatileBeaconData.HEALTH.gt(HealthItem.HEALTH_STATUS_LOST).filtered(beaconDataForCurrentBeacon().channelBeacons()).valueForKey("message")).componentsJoinedByString("<br />");
+		thirdLineForCurrentBeaconDisplay = beaconDataForCurrentBeacon().channelInformation().componentsJoinedByString("<br />");
 	}
 	
 	public boolean hasThirdLineForCurrentBeaconDisplay() {
-		return !StringUtils.isEmpty(thirdLineForCurrentBeaconDisplay);
+		return StringUtils.isNotEmpty(thirdLineForCurrentBeaconDisplay);
+	}
+	
+	@Override
+	public void sleep() {
+		super.sleep();
+		currentlyDisplayedBeacons = null;
 	}
 }

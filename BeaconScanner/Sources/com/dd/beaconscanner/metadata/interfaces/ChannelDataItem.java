@@ -8,5 +8,6 @@ package com.dd.beaconscanner.metadata.interfaces;
  *
  */
 public interface ChannelDataItem extends BeaconDataItem {
+	public BeaconDataItem beaconData();
 
 }

@@ -3,6 +3,8 @@
  */
 package com.dd.beaconscanner.metadata.volotile;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.dd.beaconscanner.metadata.interfaces.PersonBeaconItem;
 
 /**
@@ -107,6 +109,26 @@ public class VolatilePersonBeacon extends VolatileBeaconData implements
 
 	public void setIconURL(String iconURL) {
 		this.iconURL = iconURL;
+	}
+
+	@Override
+	public String primaryInformationString() {
+		StringBuilder sb =  new StringBuilder();
+		if(StringUtils.isNotBlank(title())){
+			sb.append(title()+" ");
+		}
+		if(StringUtils.isNotBlank(firstName())){
+			sb.append(firstName()+" ");
+		}
+		if(StringUtils.isNotBlank(lastName())){
+			sb.append(lastName());
+		}
+		return sb.toString();
+	}
+
+	@Override
+	public String secondaryInformationString() {
+		return position();
 	}
 
 }

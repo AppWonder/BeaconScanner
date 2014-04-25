@@ -1,5 +1,7 @@
 package com.dd.beaconscanner.metadata.volotile;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.dd.beaconscanner.metadata.interfaces.AssetBeaconItem;
 
 public class VolatileAssetBeacon extends VolatileBeaconData implements AssetBeaconItem {
@@ -55,5 +57,14 @@ public class VolatileAssetBeacon extends VolatileBeaconData implements AssetBeac
 	
 	public void setIconURL(String iconURL){
 		this.iconURL = iconURL;
+	}
+	
+	public String primaryInformationString(){
+		return assetType();
+	}
+
+	@Override
+	public String secondaryInformationString() {
+		return assetId();
 	}
 }

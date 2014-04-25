@@ -67,6 +67,9 @@ public abstract class VolatileBeaconData implements BeaconDataItem, HealthItem, 
 	}
 	
 	public abstract String type();
+	public abstract String primaryInformationString();
+	public abstract String secondaryInformationString();
+	public abstract String iconURL();
 	
 	public NSArray<VolatileChannelBeacon> channelBeacons(){
 		return channelBeacons;
@@ -88,6 +91,11 @@ public abstract class VolatileBeaconData implements BeaconDataItem, HealthItem, 
 	
 	public String uniqueKey(){
 		return BeaconManager.uniqueKey(uuid(), majorCode(), minorCode());
+	}
+	
+
+	public  NSArray<String> channelInformation(){
+		return ((NSArray<String>)VolatileBeaconData.HEALTH.gt(HealthItem.HEALTH_STATUS_LOST).filtered(channelBeacons()).valueForKey("message"));
 	}
 
 }

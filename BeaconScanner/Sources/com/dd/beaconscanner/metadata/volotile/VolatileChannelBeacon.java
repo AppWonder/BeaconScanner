@@ -3,13 +3,13 @@
  */
 package com.dd.beaconscanner.metadata.volotile;
 
-import com.dd.beaconscanner.BeaconManager;
+import com.dd.beaconscanner.metadata.interfaces.ChannelDataItem;
 
 /**
  * @author goetz
  *
  */
-public class VolatileChannelBeacon extends VolatileBeaconData {
+public class VolatileChannelBeacon extends VolatileBeaconData implements ChannelDataItem{
 
 	private String message;
 	private String action;
@@ -61,6 +61,21 @@ public class VolatileChannelBeacon extends VolatileBeaconData {
 
 	public void setBeaconData(VolatileBeaconData beaconData) {
 		this.beaconData = beaconData;
+	}
+
+	@Override
+	public String primaryInformationString() {
+		return beaconData().primaryInformationString();
+	}
+
+	@Override
+	public String secondaryInformationString() {
+		return beaconData().secondaryInformationString();
+	}
+
+	@Override
+	public String iconURL() {
+		return beaconData().iconURL();
 	}
 	
 
