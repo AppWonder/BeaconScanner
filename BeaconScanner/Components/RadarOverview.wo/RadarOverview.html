@@ -33,7 +33,7 @@
                 <wo:genericContainer elementName="div" id="$currentRadarPanelId" class="panel-collapse collapse">
                     <div class="panel-body">
                         <wo:AjaxUpdateContainer id="$currentUpdateRadarPanelId" class="row">
-                            <div class="col-xs-1 beacon-id"><wo:string value="$currentRadar.deviceId" /></div>
+                            <div class="col-xs-1 beacon-id"><wo:string value="$currentRadar.deviceId" valueWhenEmpty="000" /></div>
                             <div class="col-xs-11">
                                 <div class="row">
                                 <wo:repetition list="$allBeaconsOfCurrentRadar" item="$currentBeacon"><wo:if condition="$beaconDataForCurrentBeacon">
