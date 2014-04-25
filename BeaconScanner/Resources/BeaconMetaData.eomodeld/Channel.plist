@@ -21,10 +21,29 @@
             prototypeName = varchar1000; 
         }, 
         {columnName = minorCode; name = minorCode; prototypeName = intNumber; }, 
+        {
+            allowsNull = Y; 
+            columnName = name; 
+            externalType = VARCHAR; 
+            name = name; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 25; 
+        }, 
         {columnName = "record_type"; name = "record_type"; prototypeName = intNumber; }, 
         {allowsNull = N; columnName = uuid; name = uuid; prototypeName = varchar50; }
     ); 
-    attributesUsedForLocking = (action, beaconDataID, id, majorCode, message, minorCode, "record_type", uuid); 
+    attributesUsedForLocking = (
+        action, 
+        beaconDataID, 
+        id, 
+        majorCode, 
+        message, 
+        minorCode, 
+        name, 
+        "record_type", 
+        uuid
+    ); 
     className = "com.dd.beaconscanner.metadata.Channel"; 
     classProperties = (
         action, 
@@ -33,6 +52,7 @@
         majorCode, 
         message, 
         minorCode, 
+        name, 
         "record_type", 
         uuid
     ); 

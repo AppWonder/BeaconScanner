@@ -103,7 +103,8 @@ public class Beacon implements HealthItem, BeaconItem{
 	
 	public int health(){
 		int factor = (int)(((updateTime-System.currentTimeMillis())/1000)/6);// (float)((updateTime/1000)+50/(System.currentTimeMillis()/1000));
-
+		/*Location location = BeaconManager.getInstance().locationsByUUID().objectForKey(location());
+		long locationUpdateTime = (System.currentTimeMillis()-location.lastUpdatePlusProcessTimeEstimate())/20000;*/
 		int health =  10+factor;
 		if(health<=0){
 			return HEALTH_STATUS_LOST;

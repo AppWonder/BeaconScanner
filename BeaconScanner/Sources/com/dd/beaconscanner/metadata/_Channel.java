@@ -20,6 +20,7 @@ public abstract class _Channel extends com.dd.beaconscanner.metadata.BeaconData 
   public static final ERXKey<Integer> MAJOR_CODE = new ERXKey<Integer>("majorCode");
   public static final ERXKey<String> MESSAGE = new ERXKey<String>("message");
   public static final ERXKey<Integer> MINOR_CODE = new ERXKey<Integer>("minorCode");
+  public static final ERXKey<String> NAME = new ERXKey<String>("name");
   public static final ERXKey<Integer> RECORD_TYPE = new ERXKey<Integer>("record_type");
   public static final ERXKey<String> UUID = new ERXKey<String>("uuid");
   // Relationship Keys
@@ -31,6 +32,7 @@ public abstract class _Channel extends com.dd.beaconscanner.metadata.BeaconData 
   public static final String MAJOR_CODE_KEY = MAJOR_CODE.key();
   public static final String MESSAGE_KEY = MESSAGE.key();
   public static final String MINOR_CODE_KEY = MINOR_CODE.key();
+  public static final String NAME_KEY = NAME.key();
   public static final String RECORD_TYPE_KEY = RECORD_TYPE.key();
   public static final String UUID_KEY = UUID.key();
   // Relationships
@@ -67,6 +69,17 @@ public abstract class _Channel extends com.dd.beaconscanner.metadata.BeaconData 
     	_Channel.LOG.debug( "updating message from " + message() + " to " + value);
     }
     takeStoredValueForKey(value, _Channel.MESSAGE_KEY);
+  }
+
+  public String name() {
+    return (String) storedValueForKey(_Channel.NAME_KEY);
+  }
+
+  public void setName(String value) {
+    if (_Channel.LOG.isDebugEnabled()) {
+    	_Channel.LOG.debug( "updating name from " + name() + " to " + value);
+    }
+    takeStoredValueForKey(value, _Channel.NAME_KEY);
   }
 
   public com.dd.beaconscanner.metadata.BeaconData beaconData() {

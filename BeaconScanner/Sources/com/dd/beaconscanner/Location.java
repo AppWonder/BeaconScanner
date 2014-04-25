@@ -73,4 +73,8 @@ public class Location implements HealthItem {
 		return health;
 	}
 	
+	public long lastUpdatePlusProcessTimeEstimate(){
+		return updateTime+1000l;
+	}
+	
 }

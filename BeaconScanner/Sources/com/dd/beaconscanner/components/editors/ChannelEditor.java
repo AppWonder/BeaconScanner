@@ -22,6 +22,7 @@ public class ChannelEditor extends BaseComponent {
 	private Beacon beacon;
 	private PersonBeacon currentPerson;
 	private BeaconData newBeaconBeaconData;
+	private String newChannelBeaconName;
 
 	public ChannelEditor(WOContext context) {
         super(context);
@@ -140,6 +141,7 @@ public class ChannelEditor extends BaseComponent {
 			Channel channel = Channel.createChannel(editingContext(), newBeaconMajorCode, newBeaconMinorCode, newBeaconUuid,newBeaconBeaconData);
 			channel.setMessage(newChannelMessage);
 			channel.setAction(newChannelAction);
+			channel.setName(newChannelBeaconName);
 			saveChanges();
 			setSelectedChannel(channel);
 		}
@@ -191,5 +193,19 @@ public class ChannelEditor extends BaseComponent {
 	 */
 	public void setNewBeaconBeaconData(BeaconData newBeaconBeaconData) {
 		this.newBeaconBeaconData = newBeaconBeaconData;
+	}
+
+	/**
+	 * @return the newChannelBeaconName
+	 */
+	public String newChannelBeaconName() {
+		return newChannelBeaconName;
+	}
+
+	/**
+	 * @param newChannelBeaconName the newChannelBeaconName to set
+	 */
+	public void setNewChannelBeaconName(String newChannelBeaconName) {
+		this.newChannelBeaconName = newChannelBeaconName;
 	}
 }

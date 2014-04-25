@@ -1,5 +1,7 @@
 package com.dd.beaconscanner;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.dd.beaconscanner.metadata.BeaconData;
 import com.dd.beaconscanner.metadata.Channel;
 import com.dd.beaconscanner.metadata.LocationData;
@@ -26,6 +28,7 @@ public class BeaconManager {
 	private NSMutableDictionary<String,Location> locationsByUUID;
 	private NSMutableDictionary<String,VolatileBeaconData> beaconMetaDataForUniqueKey;
 	private NSMutableDictionary<String,VolatileLocationData> locationMetaDataForUUID;
+	private String lastBLEChunk;
 	
 	private long timeOfLastHealthCheck;
 	private static BeaconManager _beaconManager;
@@ -91,7 +94,6 @@ public class BeaconManager {
 	public void updateBeacon(String beaconData, String locationuuid){
 		try{
 			lock.tryLock();
-			updateCount++;
 			Location location = locationsByUUID.objectForKey(locationuuid);
 			if(location==null){
 				location = new Location(locationuuid);
@@ -99,6 +101,8 @@ public class BeaconManager {
 				locationsByUUID.setObjectForKey(location, locationuuid);
 			}
 			location.update(null);
+			if(StringUtils.isNotBlank(beaconData)){
+				lastBLEChunk = beaconData;
 			String lines[] = beaconData.split("\\r?\\n");
 			for(int i = 0; i<lines.length;i++){
 				
@@ -119,6 +123,7 @@ public class BeaconManager {
 				
 			}
 		}
+		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
@@ -127,9 +132,15 @@ public class BeaconManager {
 				lock.unlock();
 			}
 		}
+		
+		updateState();
+		
+	}
+
+	public void updateState() {
+		updateCount++;
 		checkBeaconHealth();
 		updateLocationMap();
-		
 	}
 	
 	public void checkBeaconHealth(){
@@ -282,6 +293,10 @@ public class BeaconManager {
 	
 	public static String uniqueKey(String uuid, Integer majorCode, Integer minorCode){
 		return uuid+":"+majorCode+":"+minorCode;
+	}
+	
+	public String lastBeaconData(){
+		return lastBLEChunk;
 	}
 }
 
