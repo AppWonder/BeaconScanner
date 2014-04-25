@@ -121,7 +121,7 @@ public class Beacon implements HealthItem, BeaconItem{
 		int _power = Integer.parseInt(bleChunks[43],16)-256;
 		int _rssi = Integer.parseInt(bleChunks[44],16)-256;
 		this.location = location;
-		if((health()<HEALTH_STATUS_GOOD&&rssi()<_rssi)){
+		if((health()<HEALTH_STATUS_MEDIUM&&rssi()<_rssi)){
 			doUpdate = true;
 		}
 		else{
