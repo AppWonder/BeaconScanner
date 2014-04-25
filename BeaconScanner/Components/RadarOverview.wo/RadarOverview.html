@@ -20,7 +20,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <wo:genericContainer elementName="a" data-toggle="collapse" data-parent="#accordion" href="$collapseLinkForCurrentBeaconPanel" class="collapsed">
+                        <wo:genericContainer elementName="a" data-toggle="collapse" data-target="~\"#\" + currentRadarPanelId" href="$collapseLinkForCurrentBeaconPanel" class="collapsed">
                            <wo:AjaxUpdateContainer class="row" id="$currentUpdateRadarStatusId">
                                 <wo:genericContainer elementName="div" class="$radarStatusIconCSSClasses">&nbsp;</wo:genericContainer>
                                 <div class="col-xs-9 beacon beacon-name"><wo:string value="$currentRadar.name" /></div>
