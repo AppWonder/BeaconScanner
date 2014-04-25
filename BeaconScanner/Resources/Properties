@@ -2,7 +2,6 @@
 ognl.helperFunctions=true
 ognl.inlineBindings=true
 ognl.parseStandardTags=true
-ognl.inlineBindings=true
 
 # Misc
 er.extensions.stackTrace.cleanup=true
