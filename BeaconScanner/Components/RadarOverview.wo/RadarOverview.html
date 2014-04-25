@@ -33,7 +33,6 @@
                 <wo:genericContainer elementName="div" id="$currentRadarPanelId" class="panel-collapse collapse">
                     <div class="panel-body">
                         <wo:AjaxUpdateContainer id="$currentUpdateRadarPanelId" class="row">
-                        
                             <div class="col-xs-1 beacon-id"><wo:string value="$currentRadar.deviceId" /></div>
                             <div class="col-xs-11">
                                 <div class="row">
@@ -44,8 +43,14 @@
                                             <wo:image src="$iconURLForCurrentBeaconDisplay" />
                                             <div class="caption">
                                                 <h4><wo:string value="$firstLineForCurrentBeaconDisplay" /></h4>
-                                                <p><wo:string value="$secondLineForCurrentBeaconDisplay" /></p>
-                                                <p><wo:string value="$thirdLineForCurrentBeaconDisplay" escapeHTML = "$false" /></p>
+                                                <p><wo:string value="$secondLineForCurrentBeaconDisplay" /></p><wo:if condition="$thirdLineForCurrentBeaconDisplay">
+                                                    <div class="popover bottom" style="display:block">
+												      <div class="arrow"></div>
+												      <h3 class="popover-title">Message</h3>
+												      <div class="popover-content">
+												        <p><wo:string value="$thirdLineForCurrentBeaconDisplay" escapeHTML = "$false" /></p>
+												      </div>
+												    </div></wo:if>
                                             </div>
                                         </wo:genericContainer>
                                     </div></wo:if>
