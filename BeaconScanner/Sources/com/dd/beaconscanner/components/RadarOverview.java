@@ -106,7 +106,9 @@ public class RadarOverview extends BaseComponent {
 	 */
 	public void setCurrentBeacon(Beacon currentBeacon) {
 		this.currentBeacon = currentBeacon;
-		if(currentBeacon!=null){
+		
+		thirdLineForCurrentBeaconDisplay = null;
+		if (currentBeacon != null) {
 			applyThirdLineForCurrentBeaconDisplay();
 		}
 	}

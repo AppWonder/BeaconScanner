@@ -39,18 +39,19 @@
                                 <wo:repetition list="$allBeaconsOfCurrentRadar" item="$currentBeacon"><wo:if condition="$beaconDataForCurrentBeacon">
  
                                     <div class="col-xs-3">
-                                        <wo:genericContainer elementName="div" class="$beaconStatusCSSClasses">
+                                        <wo:genericContainer elementName="div" class="$beaconStatusCSSClasses" style="position: relative;">
                                             <wo:image src="$iconURLForCurrentBeaconDisplay" />
-                                            <div class="caption">
-                                                <h4><wo:string value="$firstLineForCurrentBeaconDisplay" /></h4>
-                                                <p><wo:string value="$secondLineForCurrentBeaconDisplay" /></p><wo:if condition="$hasThirdLineForCurrentBeaconDisplay">
-                                                    <div class="popover bottom" style="display:block">
+                                            <wo:if condition="$hasThirdLineForCurrentBeaconDisplay">
+                                                    <div class="popover left" style="display: block; opacity: 0.75;">
 												      <div class="arrow"></div>
 												      <h3 class="popover-title">Message</h3>
 												      <div class="popover-content">
 												        <p><wo:string value="$thirdLineForCurrentBeaconDisplay" escapeHTML = "$false" /></p>
 												      </div>
 												    </div></wo:if>
+                                            <div class="caption">
+                                                <h4><wo:string value="$firstLineForCurrentBeaconDisplay" /></h4>
+                                                <p><wo:string value="$secondLineForCurrentBeaconDisplay" /></p>
                                             </div>
                                         </wo:genericContainer>
                                     </div></wo:if>
