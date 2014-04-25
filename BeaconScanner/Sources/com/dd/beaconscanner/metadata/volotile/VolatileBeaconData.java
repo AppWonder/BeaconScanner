@@ -97,5 +97,10 @@ public abstract class VolatileBeaconData implements BeaconDataItem, HealthItem, 
 	public  NSArray<String> channelInformation(){
 		return ((NSArray<String>)VolatileBeaconData.HEALTH.gt(HealthItem.HEALTH_STATUS_LOST).filtered(channelBeacons()).valueForKey("message"));
 	}
+	
+	public boolean isAlive(){
+		Beacon beacon = BeaconManager.getInstance().beaconForBeaconDataItem(this);
+		return (beacon!=null&&beacon.health()>HEALTH_STATUS_LOST); 
+	}
 
 }

@@ -6,7 +6,6 @@ import com.dd.beaconscanner.Beacon;
 import com.dd.beaconscanner.HealthItem;
 import com.dd.beaconscanner.Location;
 import com.dd.beaconscanner.metadata.LocationData;
-import com.dd.beaconscanner.metadata.interfaces.ChannelDataItem;
 import com.dd.beaconscanner.metadata.volotile.VolatileBeaconData;
 import com.dd.beaconscanner.metadata.volotile.VolatileChannelBeacon;
 import com.webobjects.appserver.WOContext;
@@ -16,7 +15,6 @@ import com.webobjects.foundation.NSMutableArray;
 public class RadarOverview extends BaseComponent {
     private LocationData currentRadar;
 	private Beacon currentBeacon;
-	private NSMutableArray<VolatileBeaconData> currentlyDisplayedBeacons;
 	
 	private String thirdLineForCurrentBeaconDisplay;
 
@@ -43,7 +41,6 @@ public class RadarOverview extends BaseComponent {
 	}
 
 	public String currentRadarPanelId() {
-		// TODO
 		return "id_"+currentRadar().primaryKey();
 	}
 
@@ -77,18 +74,16 @@ public class RadarOverview extends BaseComponent {
 
 	
 	public VolatileBeaconData beaconDataForCurrentBeacon(){
-		if(currentlyDisplayedBeacons==null){
-			currentlyDisplayedBeacons = new NSMutableArray<VolatileBeaconData>();
-		}
 		VolatileBeaconData beaconData = beaconManager().beaconMetaDataForBeacon(currentBeacon);
 		if(beaconData instanceof VolatileChannelBeacon){
 			beaconData = ((VolatileChannelBeacon)beaconData).beaconData();
+			if(beaconData!=null&&beaconData.isAlive()){
+				//channel owner is visible elsewhere so we don't display it here
+				return null;
+			}
 		}
-		if(currentlyDisplayedBeacons.containsObject(beaconData)){
-			//Beacon is already displayed so we don't want to display it again
-			return null;
-		}
-		currentlyDisplayedBeacons.addObject(beaconData);
+
+
 		return beaconData;
 	}
 	
@@ -169,16 +164,15 @@ public class RadarOverview extends BaseComponent {
 	}
 	
 	private void applyThirdLineForCurrentBeaconDisplay() {
-		thirdLineForCurrentBeaconDisplay = beaconDataForCurrentBeacon().channelInformation().componentsJoinedByString("<br />");
+		VolatileBeaconData beacon = beaconDataForCurrentBeacon();
+		if(beacon!=null){
+			thirdLineForCurrentBeaconDisplay = beacon.channelInformation().componentsJoinedByString("<br />");
+		}
 	}
 	
 	public boolean hasThirdLineForCurrentBeaconDisplay() {
 		return StringUtils.isNotEmpty(thirdLineForCurrentBeaconDisplay);
 	}
 	
-	@Override
-	public void sleep() {
-		super.sleep();
-		currentlyDisplayedBeacons = null;
-	}
+
 }
