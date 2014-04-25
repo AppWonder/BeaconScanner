@@ -26,6 +26,7 @@ public abstract class _PersonBeacon extends com.dd.beaconscanner.metadata.Beacon
   public static final ERXKey<String> TITLE = new ERXKey<String>("title");
   public static final ERXKey<String> UUID = new ERXKey<String>("uuid");
   // Relationship Keys
+  public static final ERXKey<com.dd.beaconscanner.metadata.Channel> CHANNELS = new ERXKey<com.dd.beaconscanner.metadata.Channel>("channels");
 
   // Attributes
   public static final String FIRST_NAME_KEY = FIRST_NAME.key();
@@ -38,6 +39,7 @@ public abstract class _PersonBeacon extends com.dd.beaconscanner.metadata.Beacon
   public static final String TITLE_KEY = TITLE.key();
   public static final String UUID_KEY = UUID.key();
   // Relationships
+  public static final String CHANNELS_KEY = CHANNELS.key();
 
   private static Logger LOG = Logger.getLogger(_PersonBeacon.class);
 

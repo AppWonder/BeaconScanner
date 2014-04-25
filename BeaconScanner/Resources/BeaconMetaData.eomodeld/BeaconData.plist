@@ -8,10 +8,19 @@
     ); 
     attributesUsedForLocking = (id, majorCode, minorCode, "record_type", uuid); 
     className = "com.dd.beaconscanner.metadata.BeaconData"; 
-    classProperties = (majorCode, minorCode, "record_type", uuid); 
+    classProperties = (channels, majorCode, minorCode, "record_type", uuid); 
     externalName = BeaconData; 
     fetchSpecificationDictionary = {}; 
     isAbstractEntity = Y; 
     name = BeaconData; 
     primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = Channel; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = beaconDataID; sourceAttribute = id; }); 
+            name = channels; 
+        }
+    ); 
 }

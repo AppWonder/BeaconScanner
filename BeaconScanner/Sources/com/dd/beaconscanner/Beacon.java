@@ -2,11 +2,11 @@ package com.dd.beaconscanner;
 
 import er.extensions.eof.ERXKey;
 
-public class Beacon implements HealthItem{
+public class Beacon implements HealthItem, BeaconItem{
 	public static final ERXKey<String> LOCATION = new ERXKey<String>("location");
 	public static final ERXKey<String> UUID = new ERXKey<String>("uuid");
-	public static final ERXKey<Integer> MAJOR = new ERXKey<Integer>("major");
-	public static final ERXKey<Integer> MINOR = new ERXKey<Integer>("minor");
+	public static final ERXKey<Integer> MAJOR = new ERXKey<Integer>("majorCode");
+	public static final ERXKey<Integer> MINOR = new ERXKey<Integer>("minorCode");
 	public static final ERXKey<Integer> POWER = new ERXKey<Integer>("power");
 	public static final ERXKey<Integer> RSSI = new ERXKey<Integer>("rssi");
 	public static final ERXKey<String> UNIQUE_KEY = new ERXKey<String>("uniqueKey");
@@ -45,13 +45,15 @@ public class Beacon implements HealthItem{
 		}
 		
 		uuid = sb.toString();
-		uniqueKey = BeaconManager.uniqueKeyForBLEChunk(bleChunks);
+		
 		
 		try{
 			major = Integer.parseInt(bleChunks[39]+bleChunks[40],16);
 			minor = Integer.parseInt(bleChunks[41]+bleChunks[42],16);
+			uniqueKey = BeaconManager.uniqueKey(uuid,major,minor);
 			power = Integer.parseInt(bleChunks[43],16)-256;
 			rssi = Integer.parseInt(bleChunks[44],16)-256;
+		//	uniqueKey = uuid+""+major+""+minor;
 			
 		}
 		catch(Exception e){
@@ -68,16 +70,16 @@ public class Beacon implements HealthItem{
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-	public Integer major() {
+	public Integer majorCode() {
 		return major;
 	}
-	public void setMajor(Integer major) {
+	public void setMajorCode(Integer major) {
 		this.major = major;
 	}
-	public Integer minor() {
+	public Integer minorCode() {
 		return minor;
 	}
-	public void setMinor(Integer minor) {
+	public void setMinorCode(Integer minor) {
 		this.minor = minor;
 	}
 	public Integer power() {
@@ -143,7 +145,7 @@ public class Beacon implements HealthItem{
 	
 	@Override
 	public String toString() {
-		return "uuid:"+uuid()+" major:"+major()+" minor:"+minor+" power:"+power()+" rssi:"+rssi()+" location:"+location();
+		return "uuid:"+uuid()+" major:"+majorCode()+" minor:"+minor+" power:"+power()+" rssi:"+rssi()+" location:"+location();
 	}
 	
 	public String uniqueKey(){

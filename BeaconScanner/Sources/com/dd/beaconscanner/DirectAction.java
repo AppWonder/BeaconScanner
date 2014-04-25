@@ -2,6 +2,7 @@ package com.dd.beaconscanner;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.dd.beaconscanner.components.AssetOverview;
 import com.dd.beaconscanner.components.Main;
 import com.dd.beaconscanner.components.PersonOverview;
 import com.dd.beaconscanner.components.RadarOverview;
@@ -52,5 +53,9 @@ public class DirectAction extends ERXDirectAction {
 	
 	public WOActionResults personOverviewAction(){
 		return pageWithName(PersonOverview.class);
+	}
+	
+	public WOActionResults assetOverviewAction(){
+		return pageWithName(AssetOverview.class);
 	}
 }

@@ -1,7 +1,9 @@
 package com.dd.beaconscanner;
 
 import com.dd.beaconscanner.metadata.BeaconData;
+import com.dd.beaconscanner.metadata.Channel;
 import com.dd.beaconscanner.metadata.LocationData;
+import com.dd.beaconscanner.metadata.interfaces.BeaconDataItem;
 import com.dd.beaconscanner.metadata.volotile.VolatileBeaconData;
 import com.dd.beaconscanner.metadata.volotile.VolatileLocationData;
 import com.webobjects.eocontrol.EOEditingContext;
@@ -55,11 +57,30 @@ public class BeaconManager {
 
 
 	public static String uniqueKeyForBLEChunk(String[] bleChunks) {
+		try{
+		StringBuilder sb = new StringBuilder();
+		for(int i = 23; i < 39;i++){
+			sb.append(bleChunks[i]);
+		}
+		
+		String uuid = sb.toString();
+		
+		
+		
+		int	major = Integer.parseInt(bleChunks[39]+bleChunks[40],16);
+		int	minor = Integer.parseInt(bleChunks[41]+bleChunks[42],16);
+		return uniqueKey(uuid, major, minor);
+		/*	
 		StringBuilder sb = new StringBuilder();
 		for(int i = 23; i < 43;i++){
 			sb.append(bleChunks[i]);
 		}
 		return sb.toString();
+		*/}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return null;
+		}
 		
 	}
 	
@@ -151,16 +172,20 @@ public class BeaconManager {
 		return updateCount;
 	}
 	
-	public VolatileBeaconData beaconMetaDataForBeacon(Beacon beacon){
+	public VolatileBeaconData beaconMetaDataForBeacon(BeaconItem beacon){
 		VolatileBeaconData metaData = beaconMetaDataForUniqueKey.objectForKey(beacon.uniqueKey());
+
 		if(metaData==null){
 			EOEditingContext ec = ERXEC.newEditingContext();
 			ec.lock();
 			try{
-			BeaconData beaconData = BeaconData.fetchBeaconData(ec, ERXQ.and(BeaconData.UUID.eq(beacon.uuid()),BeaconData.MAJOR_CODE.eq(beacon.major()),BeaconData.MINOR_CODE.eq(beacon.minor())));
+			BeaconData beaconData = BeaconData.fetchBeaconData(ec, ERXQ.and(BeaconData.UUID.eq(beacon.uuid()),BeaconData.MAJOR_CODE.eq(beacon.majorCode()),BeaconData.MINOR_CODE.eq(beacon.minorCode())));
 				if(beaconData!=null){
 					metaData = beaconData.volatileRepresentation();
 					beaconMetaDataForUniqueKey.setObjectForKey(metaData, beacon.uniqueKey());
+				}
+				else{
+
 				}
 
 			}
@@ -170,6 +195,12 @@ public class BeaconManager {
 			finally{
 				ec.unlock();
 			}
+		}
+		if(metaData!=null){
+		//	System.out.println("metaData.channelBeacons(): "+metaData.channelBeacons());
+		}
+		else{
+		//	System.out.println(":-( "+beacon.minor());
 		}
 		return metaData;
 	}
@@ -243,9 +274,14 @@ public class BeaconManager {
 		}
 	}
 	
-	public Beacon beaconForUniqueKey(String uniqueKey){
-		Beacon aBeacon = Beacon.UNIQUE_KEY.eq(uniqueKey).filtered(currentBeacons().immutableClone()).lastObject();
+	public Beacon beaconForBeaconDataItem(BeaconDataItem beacon){
+		Beacon aBeacon = ERXQ.and(Beacon.UUID.eq(beacon.uuid()),Beacon.MAJOR.eq(beacon.majorCode()),Beacon.MINOR.eq(beacon.minorCode())).filtered(currentBeacons().immutableClone()).lastObject();
 		return aBeacon;
+	}
+	
+	
+	public static String uniqueKey(String uuid, Integer majorCode, Integer minorCode){
+		return uuid+":"+majorCode+":"+minorCode;
 	}
 }
 

@@ -19,20 +19,18 @@
             <thead>
                 <tr>
                 <th>&nbsp;</th>
-                <th>Title</th>
-                    <th>Name</th>
-                    <th>Position</th>
+                <th>Type</th>
+                    <th>Id</th>
                     <th>Location</th>
                 </tr>
             </thead>
            <!--  <tbody>-->
             <tbody class="row" >
-                <wo:repetition list="$allPerson" item="$currentPerson"><tr>
-                <td><wo:image src="$currentPerson.iconURL" height="50"/></td>
-                <td><wo:string value="$currentPerson.title" /></td>
-                    <td><wo:string value="$currentPerson.lastName" />, <wo:string value="$currentPerson.firstName" /></td>
-                    <td><wo:string value="$currentPerson.position" /></td>
-                    <wo:AjaxUpdateContainer id="$currentPersonLocationDomID" elementName="td"><wo:string value="$locationForCurrentPerson" /></wo:AjaxUpdateContainer>
+                <wo:repetition list="$allAssets" item="$currentAsset"><tr>
+                <td><wo:image src="$currentAsset.iconURL" height="50"/></td>
+                <td><wo:string value="$currentAsset.assetType" /></td>
+                    <td><wo:string value="$currentAsset.assetId" /></td>
+                    <wo:AjaxUpdateContainer id="$currentAssetLocationDomID" elementName="td"><wo:string value="$locationForCurrentAsset" /></wo:AjaxUpdateContainer>
                 </tr></wo:repetition>
                 </tbody>
             <!--  </tbody>-->

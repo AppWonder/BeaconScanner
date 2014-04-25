@@ -156,4 +156,8 @@ public class RadarOverview extends BaseComponent {
 		}
 		return ids.immutableClone();
 	}
+
+	public String thirdLineForCurrentBeaconDisplay() {
+		return ((NSArray<String>)VolatileBeaconData.HEALTH.gt(HealthItem.HEALTH_STATUS_LOST).filtered(beaconDataForCurrentBeacon().channelBeacons()).valueForKey("message")).componentsJoinedByString("<br />");
+	}
 }

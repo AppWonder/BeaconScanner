@@ -10,6 +10,7 @@
 <tr><th>UUID</th><td><wo:textField value="$selectedChannel.uuid" /></td></tr>
 <tr><th>Major</th><td><wo:textField value="$selectedChannel.majorCode" numberformat = "0"/></td></tr>
 <tr><th>Minor</th><td><wo:textField value="$selectedChannel.minorCode" numberformat = "0"/></td></tr>
+<tr><th>Owner</th><td><wo:popUpButton list="$allPerson" item="$currentPerson" selection="$selectedChannel.beaconData" displayString = "$currentPerson.firstName" /></td></tr>
 <tr><th>Message</th><td><wo:text value="$selectedChannel.message" /></td></tr>
 <tr><th>Action</th><td><wo:text value="$selectedChannel.action" /></td></tr>
 <tr><th colspan="2"><wo:submitButton action="$saveChanges" value="save" /></th></tr>
@@ -23,6 +24,7 @@
 <tr><th>UUID</th><td><wo:textField value="$newBeaconUuid" /></td></tr>
 <tr><th>Major</th><td><wo:textField value="$newBeaconMajorCode" numberformat = "0"/></td></tr>
 <tr><th>Minor</th><td><wo:textField value="$newBeaconMinorCode" numberformat = "0"/></td></tr>
+<tr><th>Owner</th><td><wo:popUpButton list="$allPerson" item="$currentPerson" selection="$newBeaconBeaconData" displayString = "$currentPerson.firstName" /></td></tr>
 <tr><th>Message</th><td><wo:text value="$newChannelMessage" /></td></tr>
 <tr><th>Action</th><td><wo:text value="$newChannelAction" /></td></tr>
 <tr><th colspan="2"><wo:submitButton action="$create" value="register" /></th></tr>

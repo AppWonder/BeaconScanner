@@ -6,6 +6,12 @@
             name = action; 
             prototypeName = longText; 
         }, 
+        {
+            allowsNull = N; 
+            columnName = beaconDataID; 
+            name = beaconDataID; 
+            prototypeName = id; 
+        }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
         {columnName = majorCode; name = majorCode; prototypeName = intNumber; }, 
         {
@@ -18,13 +24,39 @@
         {columnName = "record_type"; name = "record_type"; prototypeName = intNumber; }, 
         {allowsNull = N; columnName = uuid; name = uuid; prototypeName = varchar50; }
     ); 
-    attributesUsedForLocking = (action, id, majorCode, message, minorCode, "record_type", uuid); 
+    attributesUsedForLocking = (action, beaconDataID, id, majorCode, message, minorCode, "record_type", uuid); 
     className = "com.dd.beaconscanner.metadata.Channel"; 
-    classProperties = (action, majorCode, message, minorCode, "record_type", uuid); 
+    classProperties = (
+        action, 
+        beaconData, 
+        channels, 
+        majorCode, 
+        message, 
+        minorCode, 
+        "record_type", 
+        uuid
+    ); 
     externalName = BeaconData; 
     fetchSpecificationDictionary = {}; 
     name = Channel; 
     parent = BeaconData; 
     primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = BeaconData; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = beaconDataID; }); 
+            name = beaconData; 
+        }, 
+        {
+            destination = Channel; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = beaconDataID; sourceAttribute = id; }); 
+            name = channels; 
+        }
+    ); 
     restrictingQualifier = "record_type = 3000"; 
 }

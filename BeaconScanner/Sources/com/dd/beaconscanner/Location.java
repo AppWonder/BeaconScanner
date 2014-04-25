@@ -60,7 +60,7 @@ public class Location implements HealthItem {
 	}
 	
 	public int health(){
-		int factor = (int)(((updateTime-System.currentTimeMillis())/1000)/6);// (float)((updateTime/1000)+50/(System.currentTimeMillis()/1000));
+		int factor = (int)(((updateTime-System.currentTimeMillis())/1000)/12);// (float)((updateTime/1000)+50/(System.currentTimeMillis()/1000));
 
 		int health =  10+factor;
 		if(health<=0){

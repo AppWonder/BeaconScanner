@@ -1,17 +1,13 @@
 package com.dd.beaconscanner.metadata.interfaces;
 
-public interface BeaconDataItem {
+import com.dd.beaconscanner.BeaconItem;
 
-	public abstract Integer majorCode();
+public interface BeaconDataItem extends BeaconItem{
+
+	
 
 	public abstract void setMajorCode(Integer value);
-
-	public abstract Integer minorCode();
-
 	public abstract void setMinorCode(Integer value);
-
-	public abstract String uuid();
-
 	public abstract void setUuid(String value);
 
 }

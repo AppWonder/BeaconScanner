@@ -50,11 +50,11 @@ log4j.appender.A1.layout.ConversionPattern=%d{MMM dd HH:mm:ss} %$[%#] %-5p %c %x
 # on in the middle of the app simply set the below category to debug.
 # Very handy.
 # Base Category
-log4j.logger.er=INFO
+log4j.logger.er=WARN
 
 # ERExtensions
 # Transaction - Switching this to debug will start the sql ouputting.
-log4j.logger.er.transaction.adaptor.EOAdaptorDebugEnabled=DEBUG
+log4j.logger.er.transaction.adaptor.EOAdaptorDebugEnabled=WARN
 
 # Fixes - Turning this on will show all the models that are loaded
 log4j.logger.er.extensions.fixes.ERSharedEOLoader=INFO

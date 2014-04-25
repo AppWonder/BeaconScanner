@@ -24,6 +24,7 @@ public abstract class _AssetBeacon extends com.dd.beaconscanner.metadata.BeaconD
   public static final ERXKey<Integer> RECORD_TYPE = new ERXKey<Integer>("record_type");
   public static final ERXKey<String> UUID = new ERXKey<String>("uuid");
   // Relationship Keys
+  public static final ERXKey<com.dd.beaconscanner.metadata.Channel> CHANNELS = new ERXKey<com.dd.beaconscanner.metadata.Channel>("channels");
 
   // Attributes
   public static final String ASSET_ID_KEY = ASSET_ID.key();
@@ -34,6 +35,7 @@ public abstract class _AssetBeacon extends com.dd.beaconscanner.metadata.BeaconD
   public static final String RECORD_TYPE_KEY = RECORD_TYPE.key();
   public static final String UUID_KEY = UUID.key();
   // Relationships
+  public static final String CHANNELS_KEY = CHANNELS.key();
 
   private static Logger LOG = Logger.getLogger(_AssetBeacon.class);
 

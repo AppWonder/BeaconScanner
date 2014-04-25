@@ -23,6 +23,8 @@ public abstract class _Channel extends com.dd.beaconscanner.metadata.BeaconData 
   public static final ERXKey<Integer> RECORD_TYPE = new ERXKey<Integer>("record_type");
   public static final ERXKey<String> UUID = new ERXKey<String>("uuid");
   // Relationship Keys
+  public static final ERXKey<com.dd.beaconscanner.metadata.BeaconData> BEACON_DATA = new ERXKey<com.dd.beaconscanner.metadata.BeaconData>("beaconData");
+  public static final ERXKey<com.dd.beaconscanner.metadata.Channel> CHANNELS = new ERXKey<com.dd.beaconscanner.metadata.Channel>("channels");
 
   // Attributes
   public static final String ACTION_KEY = ACTION.key();
@@ -32,6 +34,8 @@ public abstract class _Channel extends com.dd.beaconscanner.metadata.BeaconData 
   public static final String RECORD_TYPE_KEY = RECORD_TYPE.key();
   public static final String UUID_KEY = UUID.key();
   // Relationships
+  public static final String BEACON_DATA_KEY = BEACON_DATA.key();
+  public static final String CHANNELS_KEY = CHANNELS.key();
 
   private static Logger LOG = Logger.getLogger(_Channel.class);
 
@@ -65,15 +69,41 @@ public abstract class _Channel extends com.dd.beaconscanner.metadata.BeaconData 
     takeStoredValueForKey(value, _Channel.MESSAGE_KEY);
   }
 
+  public com.dd.beaconscanner.metadata.BeaconData beaconData() {
+    return (com.dd.beaconscanner.metadata.BeaconData)storedValueForKey(_Channel.BEACON_DATA_KEY);
+  }
+  
+  public void setBeaconData(com.dd.beaconscanner.metadata.BeaconData value) {
+    takeStoredValueForKey(value, _Channel.BEACON_DATA_KEY);
+  }
+
+  public void setBeaconDataRelationship(com.dd.beaconscanner.metadata.BeaconData value) {
+    if (_Channel.LOG.isDebugEnabled()) {
+      _Channel.LOG.debug("updating beaconData from " + beaconData() + " to " + value);
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	setBeaconData(value);
+    }
+    else if (value == null) {
+    	com.dd.beaconscanner.metadata.BeaconData oldValue = beaconData();
+    	if (oldValue != null) {
+    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, _Channel.BEACON_DATA_KEY);
+      }
+    } else {
+    	addObjectToBothSidesOfRelationshipWithKey(value, _Channel.BEACON_DATA_KEY);
+    }
+  }
+  
 
   public static Channel createChannel(EOEditingContext editingContext, Integer majorCode
 , Integer minorCode
 , String uuid
-) {
+, com.dd.beaconscanner.metadata.BeaconData beaconData) {
     Channel eo = (Channel) EOUtilities.createAndInsertInstance(editingContext, _Channel.ENTITY_NAME);    
 		eo.setMajorCode(majorCode);
 		eo.setMinorCode(minorCode);
 		eo.setUuid(uuid);
+    eo.setBeaconDataRelationship(beaconData);
     return eo;
   }
 

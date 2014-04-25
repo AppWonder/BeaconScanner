@@ -9,7 +9,7 @@ Beacons for Location <wo:string value="$currentLocation" />
 <table border="1">
 <tr><th>UUID</th><th>Major</th><th>Minor</th><th>Power</th><th>RSSI</th><th>Location</th><td>Health</td></tr>
 <wo:repetition list="$beaconsForCurrentLocation" item="$currentBeacon">
-<tr><td><wo:string value="$currentBeacon.uuid" /></td><td><wo:string value="$currentBeacon.major" /></td><td><wo:string value="$currentBeacon.minor" /></td><td><wo:string value="$currentBeacon.power" /></td><td><wo:string value="$currentBeacon.rssi" /></td><td><wo:string value="$currentBeacon.location" valueWhenEmpty = "--" /></td><td><wo:string value="$currentBeacon.health" /></td></tr>
+<tr><td><wo:string value="$currentBeacon.uuid" /></td><td><wo:string value="$currentBeacon.majorCode" /></td><td><wo:string value="$currentBeacon.minorCode" /></td><td><wo:string value="$currentBeacon.power" /></td><td><wo:string value="$currentBeacon.rssi" /></td><td><wo:string value="$currentBeacon.location" valueWhenEmpty = "--" /></td><td><wo:string value="$currentBeacon.health" /></td></tr>
 </wo:repetition>
 </table>
 </wo:repetition></wo:AjaxUpdateContainer>

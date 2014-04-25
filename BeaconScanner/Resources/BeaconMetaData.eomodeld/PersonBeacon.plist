@@ -45,6 +45,7 @@
     ); 
     className = "com.dd.beaconscanner.metadata.PersonBeacon"; 
     classProperties = (
+        channels, 
         firstName, 
         iconURL, 
         lastName, 
@@ -60,5 +61,14 @@
     name = PersonBeacon; 
     parent = BeaconData; 
     primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = Channel; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = beaconDataID; sourceAttribute = id; }); 
+            name = channels; 
+        }
+    ); 
     restrictingQualifier = "record_type = 1000"; 
 }

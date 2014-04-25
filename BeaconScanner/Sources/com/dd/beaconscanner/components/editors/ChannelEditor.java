@@ -2,12 +2,14 @@ package com.dd.beaconscanner.components.editors;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.webobjects.appserver.WOContext;
-import com.dd.beaconscanner.components.BaseComponent;
-import com.webobjects.foundation.NSArray;
-import com.dd.beaconscanner.metadata.Channel;
-import com.webobjects.appserver.WOActionResults;
 import com.dd.beaconscanner.Beacon;
+import com.dd.beaconscanner.components.BaseComponent;
+import com.dd.beaconscanner.metadata.Channel;
+import com.dd.beaconscanner.metadata.PersonBeacon;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+import com.dd.beaconscanner.metadata.BeaconData;
 
 public class ChannelEditor extends BaseComponent {
     private Channel currentChannel;
@@ -18,6 +20,8 @@ public class ChannelEditor extends BaseComponent {
 	private String newChannelMessage;
 	private String newChannelAction;
 	private Beacon beacon;
+	private PersonBeacon currentPerson;
+	private BeaconData newBeaconBeaconData;
 
 	public ChannelEditor(WOContext context) {
         super(context);
@@ -132,8 +136,8 @@ public class ChannelEditor extends BaseComponent {
 	}
 
 	public WOActionResults create() {
-		if(StringUtils.isNotBlank(newBeaconUuid())&&newBeaconMajorCode()!=null&&newBeaconMinorCode()!=null){
-			Channel channel = Channel.createChannel(editingContext(), newBeaconMajorCode, newBeaconMinorCode, newBeaconUuid);
+		if(StringUtils.isNotBlank(newBeaconUuid())&&newBeaconMajorCode()!=null&&newBeaconMinorCode()!=null&&newBeaconBeaconData()!=null){
+			Channel channel = Channel.createChannel(editingContext(), newBeaconMajorCode, newBeaconMinorCode, newBeaconUuid,newBeaconBeaconData);
 			channel.setMessage(newChannelMessage);
 			channel.setAction(newChannelAction);
 			saveChanges();
@@ -154,5 +158,38 @@ public class ChannelEditor extends BaseComponent {
 	 */
 	public void setBeacon(Beacon beacon) {
 		this.beacon = beacon;
+	}
+
+	/**
+	 * @return the currentPerson
+	 */
+	public PersonBeacon currentPerson() {
+		return currentPerson;
+	}
+
+	/**
+	 * @param currentPerson the currentPerson to set
+	 */
+	public void setCurrentPerson(PersonBeacon currentPerson) {
+		this.currentPerson = currentPerson;
+	}
+
+	public NSArray<PersonBeacon> allPerson() {
+		// TODO
+		return PersonBeacon.fetchAllPersonBeacons(editingContext());
+	}
+
+	/**
+	 * @return the newBeaconBeaconData
+	 */
+	public BeaconData newBeaconBeaconData() {
+		return newBeaconBeaconData;
+	}
+
+	/**
+	 * @param newBeaconBeaconData the newBeaconBeaconData to set
+	 */
+	public void setNewBeaconBeaconData(BeaconData newBeaconBeaconData) {
+		this.newBeaconBeaconData = newBeaconBeaconData;
 	}
 }

@@ -38,12 +38,14 @@
                             <div class="col-xs-11">
                                 <div class="row">
                                 <wo:repetition list="$allBeaconsOfCurrentRadar" item="$currentBeacon"><wo:if condition="$beaconDataForCurrentBeacon">
+ 
                                     <div class="col-xs-3">
                                         <wo:genericContainer elementName="div" class="$beaconStatusCSSClasses">
                                             <wo:image src="$iconURLForCurrentBeaconDisplay" />
                                             <div class="caption">
                                                 <h4><wo:string value="$firstLineForCurrentBeaconDisplay" /></h4>
                                                 <p><wo:string value="$secondLineForCurrentBeaconDisplay" /></p>
+                                                <p><wo:string value="$thirdLineForCurrentBeaconDisplay" escapeHTML = "$false" /></p>
                                             </div>
                                         </wo:genericContainer>
                                     </div></wo:if>

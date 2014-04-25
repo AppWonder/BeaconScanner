@@ -21,6 +21,7 @@ public abstract class _BeaconData extends  ERXGenericRecord {
   public static final ERXKey<Integer> RECORD_TYPE = new ERXKey<Integer>("record_type");
   public static final ERXKey<String> UUID = new ERXKey<String>("uuid");
   // Relationship Keys
+  public static final ERXKey<com.dd.beaconscanner.metadata.Channel> CHANNELS = new ERXKey<com.dd.beaconscanner.metadata.Channel>("channels");
 
   // Attributes
   public static final String MAJOR_CODE_KEY = MAJOR_CODE.key();
@@ -28,6 +29,7 @@ public abstract class _BeaconData extends  ERXGenericRecord {
   public static final String RECORD_TYPE_KEY = RECORD_TYPE.key();
   public static final String UUID_KEY = UUID.key();
   // Relationships
+  public static final String CHANNELS_KEY = CHANNELS.key();
 
   private static Logger LOG = Logger.getLogger(_BeaconData.class);
 
@@ -81,6 +83,100 @@ public abstract class _BeaconData extends  ERXGenericRecord {
     	_BeaconData.LOG.debug( "updating uuid from " + uuid() + " to " + value);
     }
     takeStoredValueForKey(value, _BeaconData.UUID_KEY);
+  }
+
+  public NSArray<com.dd.beaconscanner.metadata.Channel> channels() {
+    return (NSArray<com.dd.beaconscanner.metadata.Channel>)storedValueForKey(_BeaconData.CHANNELS_KEY);
+  }
+
+  public NSArray<com.dd.beaconscanner.metadata.Channel> channels(EOQualifier qualifier) {
+    return channels(qualifier, null, false);
+  }
+
+  public NSArray<com.dd.beaconscanner.metadata.Channel> channels(EOQualifier qualifier, boolean fetch) {
+    return channels(qualifier, null, fetch);
+  }
+
+  public NSArray<com.dd.beaconscanner.metadata.Channel> channels(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
+    NSArray<com.dd.beaconscanner.metadata.Channel> results;
+    if (fetch) {
+      EOQualifier fullQualifier;
+      EOQualifier inverseQualifier = new EOKeyValueQualifier(com.dd.beaconscanner.metadata.Channel.BEACON_DATA_KEY, EOQualifier.QualifierOperatorEqual, this);
+    	
+      if (qualifier == null) {
+        fullQualifier = inverseQualifier;
+      }
+      else {
+        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+        qualifiers.addObject(qualifier);
+        qualifiers.addObject(inverseQualifier);
+        fullQualifier = new EOAndQualifier(qualifiers);
+      }
+
+      results = com.dd.beaconscanner.metadata.Channel.fetchChannels(editingContext(), fullQualifier, sortOrderings);
+    }
+    else {
+      results = channels();
+      if (qualifier != null) {
+        results = (NSArray<com.dd.beaconscanner.metadata.Channel>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<com.dd.beaconscanner.metadata.Channel>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    }
+    return results;
+  }
+  
+  public void addToChannels(com.dd.beaconscanner.metadata.Channel object) {
+    includeObjectIntoPropertyWithKey(object, _BeaconData.CHANNELS_KEY);
+  }
+
+  public void removeFromChannels(com.dd.beaconscanner.metadata.Channel object) {
+    excludeObjectFromPropertyWithKey(object, _BeaconData.CHANNELS_KEY);
+  }
+
+  public void addToChannelsRelationship(com.dd.beaconscanner.metadata.Channel object) {
+    if (_BeaconData.LOG.isDebugEnabled()) {
+      _BeaconData.LOG.debug("adding " + object + " to channels relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToChannels(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _BeaconData.CHANNELS_KEY);
+    }
+  }
+
+  public void removeFromChannelsRelationship(com.dd.beaconscanner.metadata.Channel object) {
+    if (_BeaconData.LOG.isDebugEnabled()) {
+      _BeaconData.LOG.debug("removing " + object + " from channels relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromChannels(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _BeaconData.CHANNELS_KEY);
+    }
+  }
+
+  public com.dd.beaconscanner.metadata.Channel createChannelsRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( com.dd.beaconscanner.metadata.Channel.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _BeaconData.CHANNELS_KEY);
+    return (com.dd.beaconscanner.metadata.Channel) eo;
+  }
+
+  public void deleteChannelsRelationship(com.dd.beaconscanner.metadata.Channel object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _BeaconData.CHANNELS_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllChannelsRelationships() {
+    Enumeration<com.dd.beaconscanner.metadata.Channel> objects = channels().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteChannelsRelationship(objects.nextElement());
+    }
   }
 
 
