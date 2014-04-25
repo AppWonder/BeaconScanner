@@ -1,5 +1,7 @@
 package com.dd.beaconscanner.components;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.dd.beaconscanner.Beacon;
 import com.dd.beaconscanner.HealthItem;
 import com.dd.beaconscanner.Location;
@@ -14,6 +16,8 @@ import com.webobjects.foundation.NSMutableArray;
 public class RadarOverview extends BaseComponent {
     private LocationData currentRadar;
 	private Beacon currentBeacon;
+	
+	private String thirdLineForCurrentBeaconDisplay;
 
 	public RadarOverview(WOContext context) {
         super(context);
@@ -102,6 +106,7 @@ public class RadarOverview extends BaseComponent {
 	 */
 	public void setCurrentBeacon(Beacon currentBeacon) {
 		this.currentBeacon = currentBeacon;
+		applyThirdLineForCurrentBeaconDisplay();
 	}
 
 	public Integer beaconCountForCurrentRadar() {
@@ -158,6 +163,14 @@ public class RadarOverview extends BaseComponent {
 	}
 
 	public String thirdLineForCurrentBeaconDisplay() {
-		return ((NSArray<String>)VolatileBeaconData.HEALTH.gt(HealthItem.HEALTH_STATUS_LOST).filtered(beaconDataForCurrentBeacon().channelBeacons()).valueForKey("message")).componentsJoinedByString("<br />");
+		return thirdLineForCurrentBeaconDisplay;
+	}
+	
+	private void applyThirdLineForCurrentBeaconDisplay() {
+		thirdLineForCurrentBeaconDisplay = ((NSArray<String>)VolatileBeaconData.HEALTH.gt(HealthItem.HEALTH_STATUS_LOST).filtered(beaconDataForCurrentBeacon().channelBeacons()).valueForKey("message")).componentsJoinedByString("<br />");
+	}
+	
+	public boolean hasThirdLineForCurrentBeaconDisplay() {
+		return !StringUtils.isEmpty(thirdLineForCurrentBeaconDisplay);
 	}
 }
